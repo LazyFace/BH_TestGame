@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour
 
     //movement variables
     private Vector3 movementInput;
-    [SerializeField] private float speed = 0;
+
+    [SerializeField] private PlayerConfig_SO playerData;
+    [SerializeField] private GameObject pistol;
 
     private void Awake()
     {
@@ -16,12 +18,12 @@ public class PlayerController : MonoBehaviour
         {
             playerRB = GetComponent<Rigidbody>();
         }
-        
     }
 
     private void Update()
     {
         GetInput();
+        Shoot();
     }
 
     private void FixedUpdate()
@@ -30,16 +32,26 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
     }
 
+    private void Shoot()
+    {
+        if (Input.GetKey(playerData.shootGun))
+        {
+            Debug.Log("Piuu");
+            IShootable fireGun = pistol.GetComponent<IShootable>();
+            fireGun?.Fire();
+        }
+    }
+
     private void GetInput()
     {
         int xInput = 0;
         int zInput = 0;
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(playerData.up)) //Up
         {
             zInput = 1;
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(playerData.down)) //Down
         {
             zInput = -1;
         }
@@ -47,12 +59,12 @@ public class PlayerController : MonoBehaviour
         {
             zInput = 0;
         }
-
-        if (Input.GetKey(KeyCode.D))
+        
+        if (Input.GetKey(playerData.right)) //Right
         {
             xInput = 1;
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(playerData.left)) //Left
         {
             xInput = -1;
         }
@@ -68,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector3 moveVector = movementInput * speed;
+        Vector3 moveVector = movementInput * playerData.speed;
         playerRB.velocity = new Vector3(moveVector.x, playerRB.velocity.y, moveVector.z);
         Mathf.Clamp(playerRB.velocity.magnitude, 0f, 10f);
     }
