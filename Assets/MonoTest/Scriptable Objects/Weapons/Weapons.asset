@@ -9,15 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ce96760f0b64d846bd5000538092646, type: 3}
-  m_Name: Player1
+  m_Script: {fileID: 11500000, guid: a52eca4c29eb008408073b216fd32279, type: 3}
+  m_Name: Weapons
   m_EditorClassIdentifier: 
-  health: 100
-  speed: 5
-  up: 119
-  down: 115
-  left: 97
-  right: 100
-  reloadGun: 114
-  shootGun: 32
-  ChangeGun: 101
+  weapons:
+  - {fileID: 2401838818374999236, guid: a41673098f302814a9b480b663ec76b3, type: 3}
+  - {fileID: 3848531982535782061, guid: b73272ab059746d4193c29608b43823f, type: 3}

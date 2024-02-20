@@ -19,6 +19,6 @@ public class Weapon_SO : ScriptableObject
     public int magazineSize;
     public int maxAmmo;
     public int totalAmmo;
-    [HideInInspector] public bool reloading;
+    public bool reloading;
     
 }

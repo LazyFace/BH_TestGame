@@ -14,4 +14,5 @@ public class PlayerConfig_SO : ScriptableObject
     public KeyCode right;
     public KeyCode reloadGun;
     public KeyCode shootGun;
+    public KeyCode ChangeGun;
 }

@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ce96760f0b64d846bd5000538092646, type: 3}
-  m_Name: Player1
+  m_Script: {fileID: 11500000, guid: 2767cd982528ff8438f56b55ba55a5ff, type: 3}
+  m_Name: SMG
   m_EditorClassIdentifier: 
-  health: 100
-  speed: 5
-  up: 119
-  down: 115
-  left: 97
-  right: 100
-  reloadGun: 114
-  shootGun: 32
-  ChangeGun: 101
+  fireRate: 0.25
+  gunDamage: 30
+  maxDistance: 50
+  currentMagazineAmmo: 20
+  reloadTime: 1.2
+  magazineSize: 20
+  maxAmmo: 60
+  totalAmmo: 60
+  reloading: 0

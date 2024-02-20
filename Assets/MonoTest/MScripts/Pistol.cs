@@ -11,6 +11,12 @@ public class Pistol : MonoBehaviour, IShootable
 
     private float nextFire = 0.0f;
 
+    private void Start()
+    {
+        pistol.currentMagazineAmmo = pistol.magazineSize;
+        pistol.totalAmmo = pistol.maxAmmo;
+    }
+
     private void Update()
     {
         Debug.DrawRay(firePosition.position, firePosition.forward, Color.red);
@@ -25,7 +31,7 @@ public class Pistol : MonoBehaviour, IShootable
                 RaycastHit hit;
                 if (Physics.Raycast(firePosition.position, firePosition.forward, out hit, pistol.maxDistance))
                 {
-                    Debug.Log(hit.transform.name);
+                    Debug.Log("Piuu: " + hit.transform.name);
                 }
 
                 //instantiate bullet
@@ -33,18 +39,13 @@ public class Pistol : MonoBehaviour, IShootable
                 pistol.totalAmmo--;
                 pistol.currentMagazineAmmo--;
                 nextFire = Time.time + pistol.fireRate;
-                Debug.Log("Piuu");
             }
-
-        }
-        else
-        {
-            Debug.Log("Not Ammo");
         }
     }
 
     public void Reload()
     {
+        pistol.reloading = true;
         StartCoroutine(ReloadingGunCoroutine());
     }
 
@@ -59,6 +60,7 @@ public class Pistol : MonoBehaviour, IShootable
         {
             pistol.currentMagazineAmmo = pistol.totalAmmo;
         }
+        pistol.reloading = false;
     }
 
     public Transform TakeGrabPosition()

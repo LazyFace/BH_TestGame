@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         GetInput();
         Shoot();
+        Reload();
     }
 
     private void FixedUpdate()
@@ -32,13 +33,23 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
     }
 
+    //Debuging shoot gun when pressing the button. Not the final function.
     private void Shoot()
     {
         if (Input.GetKey(playerData.shootGun))
         {
-            Debug.Log("Piuu");
             IShootable fireGun = pistol.GetComponent<IShootable>();
             fireGun?.Fire();
+        }
+    }
+
+    //Debuging shoot gun when pressing the button. Not the final function.
+    private void Reload()
+    {
+        if (Input.GetKey(playerData.reloadGun))
+        {
+            IShootable reloadGun = pistol.GetComponent<IShootable>();
+            reloadGun?.Reload();
         }
     }
 
