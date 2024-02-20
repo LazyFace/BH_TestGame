@@ -11,6 +11,8 @@ public class Pistol : MonoBehaviour, IShootable
 
     private float nextFire = 0.0f;
 
+    private int voliqueso;
+
     private void Start()
     {
         pistol.currentMagazineAmmo = pistol.magazineSize;
