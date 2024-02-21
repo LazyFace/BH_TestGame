@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour
 
     //movement variables
     private Vector3 movementInput;
-    [SerializeField] private float speed = 0;
+
+    [SerializeField] private PlayerConfig_SO playerData;
+    [SerializeField] private WeaponHolder weaponHolder;
 
     private void Awake()
     {
@@ -16,12 +18,12 @@ public class PlayerController : MonoBehaviour
         {
             playerRB = GetComponent<Rigidbody>();
         }
-        
     }
 
     private void Update()
     {
         GetInput();
+        PlayerGunActions();
     }
 
     private void FixedUpdate()
@@ -30,16 +32,50 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
     }
 
+    //shoot gun when pressing the button. 
+    private void Shoot()
+    {
+        if (Input.GetKey(playerData.shootGun))
+        {
+            weaponHolder.Shoot();
+        }
+    }
+
+    //Reload gun when pressing the button.
+    private void Reload()
+    {
+        if (Input.GetKey(playerData.reloadGun))
+        {
+            weaponHolder.Reload();
+        }
+    }
+
+    //Switch the current weapon for the next one when pressing the button.
+    private void ChangeGun()
+    {
+        if (Input.GetKeyUp(playerData.ChangeGun))
+        {
+            weaponHolder.ChangeWeapon();
+        }
+    }
+
+    private void PlayerGunActions()
+    {
+        Shoot();
+        Reload();
+        ChangeGun();
+    }
+
     private void GetInput()
     {
         int xInput = 0;
         int zInput = 0;
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(playerData.up)) //Up
         {
             zInput = 1;
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(playerData.down)) //Down
         {
             zInput = -1;
         }
@@ -47,12 +83,12 @@ public class PlayerController : MonoBehaviour
         {
             zInput = 0;
         }
-
-        if (Input.GetKey(KeyCode.D))
+        
+        if (Input.GetKey(playerData.right)) //Right
         {
             xInput = 1;
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(playerData.left)) //Left
         {
             xInput = -1;
         }
@@ -68,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector3 moveVector = movementInput * speed;
+        Vector3 moveVector = movementInput * playerData.speed;
         playerRB.velocity = new Vector3(moveVector.x, playerRB.velocity.y, moveVector.z);
         Mathf.Clamp(playerRB.velocity.magnitude, 0f, 10f);
     }
