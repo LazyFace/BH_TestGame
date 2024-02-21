@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 movementInput;
 
     [SerializeField] private PlayerConfig_SO playerData;
-    [SerializeField] private GameObject pistol;
+    [SerializeField] private WeaponHolder weaponHolder;
 
     private void Awake()
     {
@@ -23,8 +23,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GetInput();
-        Shoot();
-        Reload();
+        PlayerGunActions();
     }
 
     private void FixedUpdate()
@@ -33,24 +32,38 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
     }
 
-    //Debuging shoot gun when pressing the button. Not the final function.
+    //shoot gun when pressing the button. 
     private void Shoot()
     {
         if (Input.GetKey(playerData.shootGun))
         {
-            IShootable fireGun = pistol.GetComponent<IShootable>();
-            fireGun?.Fire();
+            weaponHolder.Shoot();
         }
     }
 
-    //Debuging shoot gun when pressing the button. Not the final function.
+    //Reload gun when pressing the button.
     private void Reload()
     {
         if (Input.GetKey(playerData.reloadGun))
         {
-            IShootable reloadGun = pistol.GetComponent<IShootable>();
-            reloadGun?.Reload();
+            weaponHolder.Reload();
         }
+    }
+
+    //Switch the current weapon for the next one when pressing the button.
+    private void ChangeGun()
+    {
+        if (Input.GetKeyUp(playerData.ChangeGun))
+        {
+            weaponHolder.ChangeWeapon();
+        }
+    }
+
+    private void PlayerGunActions()
+    {
+        Shoot();
+        Reload();
+        ChangeGun();
     }
 
     private void GetInput()

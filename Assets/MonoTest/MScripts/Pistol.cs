@@ -11,8 +11,6 @@ public class Pistol : MonoBehaviour, IShootable
 
     private float nextFire = 0.0f;
 
-    private int voliqueso;
-
     private void Start()
     {
         pistol.currentMagazineAmmo = pistol.magazineSize;
@@ -26,6 +24,7 @@ public class Pistol : MonoBehaviour, IShootable
 
     public void Fire()
     {
+        //Debug.Log("Si entre");
         if (pistol.currentMagazineAmmo > 0 && !pistol.reloading)
         {
             if(Time.time > nextFire)
