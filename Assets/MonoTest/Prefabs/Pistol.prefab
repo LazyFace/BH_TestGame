@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2341202287910588778}
   m_LocalRotation: {x: -0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.087000154, z: 0.14300005}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.0522, z: 0.1016}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3223722747476566323}
@@ -103,6 +103,7 @@ MonoBehaviour:
   pistol: {fileID: 11400000, guid: 2606b91a81baa41499d7452db1b43936, type: 2}
   grabPosition: {fileID: 3223722748442492992}
   firePosition: {fileID: 3223722747476566323}
+  bullet: {fileID: 4463183407775507191, guid: 7ca822a2d941ea74185c9507bf463f13, type: 3}
 --- !u!1 &3223722747476566320
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +160,7 @@ Transform:
   m_GameObject: {fileID: 3223722748442492993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.8, y: 4.8, z: 4.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3113763874207058896}

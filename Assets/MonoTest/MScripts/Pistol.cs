@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
 public class Pistol : MonoBehaviour, IShootable
@@ -8,6 +6,7 @@ public class Pistol : MonoBehaviour, IShootable
     [SerializeField] private Weapon_SO pistol;
     [SerializeField] private Transform grabPosition;
     [SerializeField] private Transform firePosition;
+    [SerializeField] private Bullet bullet;
 
     private float nextFire = 0.0f;
 
@@ -36,6 +35,8 @@ public class Pistol : MonoBehaviour, IShootable
                 }
 
                 //instantiate bullet
+                Bullet bulletInstance = Instantiate(bullet, firePosition.position, firePosition.rotation);
+                bulletInstance.SetBulletDamage(pistol.gunDamage);
 
                 pistol.totalAmmo--;
                 pistol.currentMagazineAmmo--;

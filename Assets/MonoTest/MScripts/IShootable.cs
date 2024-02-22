@@ -1,5 +1,3 @@
-
-using System.Numerics;
 using UnityEngine;
 
 public interface IShootable 
