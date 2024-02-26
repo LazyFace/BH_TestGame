@@ -35,8 +35,8 @@ public class Pistol : MonoBehaviour, IShootable
                 }
 
                 //instantiate bullet
-                Bullet bulletInstance = Instantiate(bullet, firePosition.position, firePosition.rotation);
-                bulletInstance.SetBulletDamage(pistol.gunDamage);
+                GameObject bulletInstance = ObjectPooler.Instance.SpawnFromPool("Bullet", firePosition.position, firePosition.rotation);
+                bulletInstance.GetComponent<Bullet>().SetBulletDamage(pistol.gunDamage);
 
                 pistol.totalAmmo--;
                 pistol.currentMagazineAmmo--;

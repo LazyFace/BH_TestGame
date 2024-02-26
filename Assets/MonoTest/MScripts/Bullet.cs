@@ -24,6 +24,8 @@ public class Bullet : MonoBehaviour
             IDamageable damage = collision.gameObject.GetComponent<IDamageable>();
             damage.GetDamaged(weaponDamage);
         }
+
+        gameObject.SetActive(false);
     }
 
     public void SetBulletDamage(int gunDamage)

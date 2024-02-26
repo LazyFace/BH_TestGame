@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-    private Animator animator;
     private Rigidbody rb;
+    private Animator animator;
     private string currentState;
     const string idleAnimation = "idle";
     const string walkingAnimation = "walk";
@@ -46,7 +46,6 @@ public class PlayerAnimationController : MonoBehaviour
         currentState = newState;
     }
 
-    //Check if an animation is playing
     private bool isAnimationPlaying(Animator animator, string animName)
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(animName) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
