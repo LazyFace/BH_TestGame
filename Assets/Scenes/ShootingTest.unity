@@ -916,8 +916,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1174888245, guid: a03ca926110a7c441841efc6a90606f0, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a03ca926110a7c441841efc6a90606f0, type: 3}
 --- !u!1001 &6398713238776708583
 PrefabInstance:
@@ -974,8 +973,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombi
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 966559313, guid: de3b88608fafa3949ab739c07d95adae, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de3b88608fafa3949ab739c07d95adae, type: 3}
 --- !u!1001 &8590957083992968758
 PrefabInstance:
@@ -1032,6 +1030,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 458933745, guid: e82cd304c55f9e44e9c9fd4eacaa8528, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e82cd304c55f9e44e9c9fd4eacaa8528, type: 3}
