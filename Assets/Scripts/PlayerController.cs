@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     private Rigidbody playerRB;
 
@@ -12,24 +12,35 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerConfig_SO playerData;
     [SerializeField] private WeaponHolder weaponHolder;
 
+    private int health;
+    private bool isDeath = false;
+
     private void Awake()
     {
         if (playerRB == null) 
         {
             playerRB = GetComponent<Rigidbody>();
         }
+
+        health = playerData.health;
     }
 
     private void Update()
     {
-        GetInput();
-        PlayerGunActions();
+        if(!isDeath)
+        {
+            GetInput();
+            PlayerGunActions();
+        }
     }
 
     private void FixedUpdate()
     {
-        MovePlayer();
-        RotatePlayer();
+        if (!isDeath) 
+        {
+            MovePlayer();
+            RotatePlayer();
+        }
     }
 
     //shoot gun when pressing the button. 
@@ -124,5 +135,19 @@ public class PlayerController : MonoBehaviour
             // Suaviza la transición hacia la nueva rotación.
             playerRB.rotation = Quaternion.Slerp(playerRB.rotation, toRotation, Time.deltaTime * 15f);
         }
+    }
+
+    public void GetDamaged(int damageAmount)
+    {
+        health -= damageAmount;
+        if (health < 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        isDeath = true;
     }
 }

@@ -12,6 +12,11 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void OnEnable()
+    {
+        rb.velocity = Vector3.zero;
+    }
+
     private void Update()
     {
         BulletInitialVelocity();
@@ -25,6 +30,8 @@ public class Bullet : MonoBehaviour
             damage.GetDamaged(weaponDamage);
         }
 
+        Debug.Log(collision.gameObject.name);
+
         gameObject.SetActive(false);
     }
 
@@ -35,6 +42,7 @@ public class Bullet : MonoBehaviour
 
     private void BulletInitialVelocity()
     {
-        rb.AddForce(transform.forward * 15f, ForceMode.Force);
+        rb.AddForce(transform.forward * 500f, ForceMode.Force);
+        Mathf.Clamp(rb.velocity.magnitude, 0f, 50f);
     }
 }

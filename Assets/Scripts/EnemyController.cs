@@ -14,12 +14,15 @@ public class EnemyController : MonoBehaviour, IDamageable
     private float speed;
     private int damage;
     private bool isDeath = false;
+    private bool isAttacking = false;
 
     //Animation references
     private Animator animator;
     private string currentState;
     const string idleAnimation = "idle";
     const string walkingAnimation = "walk";
+    const string attackRightAnimation = "attackRight";
+    const string attackLeftAnimation = "attackLeft";
     const string dieAnimation = "die";
 
     private void Awake()
@@ -45,6 +48,14 @@ public class EnemyController : MonoBehaviour, IDamageable
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Attack(other.gameObject);
+        }
+    }
+
     private void FollowPlayer(GameObject player)
     {
         float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
@@ -52,23 +63,28 @@ public class EnemyController : MonoBehaviour, IDamageable
         {
             GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
         }
-        Attack();
     }
 
-    private void Attack()
+    private void Attack(GameObject player)
     {
-        if (!isDeath) { }
+        if (!isDeath) 
+        {
+            isAttacking = true;
+            player.gameObject.GetComponent<IDamageable>().GetDamaged(damage);
+            ChangeAnimation(attackRightAnimation);
+            Debug.Log("Atacó");
+        }
     }
 
     private void EnemyAnimationsHandler()
     {
         float speedThreshold = 0.1f;
 
-        if (Mathf.Abs(navMeshAgent.velocity.x) > speedThreshold || Mathf.Abs(navMeshAgent.velocity.z) > speedThreshold)
+        if (Mathf.Abs(navMeshAgent.velocity.x) > speedThreshold || Mathf.Abs(navMeshAgent.velocity.z) > speedThreshold && !isAttacking)
         {
             ChangeAnimation(walkingAnimation);
         }
-        else
+        else if(!isAttacking)
         {
             ChangeAnimation(idleAnimation);
         }
@@ -96,8 +112,9 @@ public class EnemyController : MonoBehaviour, IDamageable
         {
             Debug.Log("Anim playing");
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
+
     private void ChangeAnimation(string newState)
     {
         if (newState == currentState)

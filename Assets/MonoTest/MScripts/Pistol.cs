@@ -28,12 +28,6 @@ public class Pistol : MonoBehaviour, IShootable
         {
             if(Time.time > nextFire)
             {
-                RaycastHit hit;
-                if (Physics.Raycast(firePosition.position, firePosition.forward, out hit, pistol.maxDistance))
-                {
-                    Debug.Log("Piuu: " + hit.transform.name);
-                }
-
                 //instantiate bullet
                 GameObject bulletInstance = ObjectPooler.Instance.SpawnFromPool("Bullet", firePosition.position, firePosition.rotation);
                 bulletInstance.GetComponent<Bullet>().SetBulletDamage(pistol.gunDamage);
