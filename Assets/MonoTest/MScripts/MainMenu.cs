@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+
+public class MainMenu : MonoBehaviour
+{
+
+    [SerializeField] private AudioMixer mixer;
+
+    public void SetMusicVolume(float musicVolume)
+    {
+        mixer.SetFloat("musicVolume", musicVolume);
+    }
+
+    public void SetSFXVolume(float sfxVolume)
+    {
+        mixer.SetFloat("sfxVolume", sfxVolume);
+    }
+    public void MapSelected(int map)
+    {
+        SceneManager.LoadScene(map);
+    }
+
+    public void PlayersNumber(int players)
+    {
+        Debug.Log("Number of players = " + players);
+
+        //GameManager function to instantiate the number of players (Max 2 players)
+    }
+}
