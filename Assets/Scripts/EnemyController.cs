@@ -80,18 +80,21 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         float speedThreshold = 0.1f;
 
-        if (Mathf.Abs(navMeshAgent.velocity.x) > speedThreshold || Mathf.Abs(navMeshAgent.velocity.z) > speedThreshold && !isAttacking)
+        if(!isAttacking) 
         {
-            ChangeAnimation(walkingAnimation);
-        }
-        else if(!isAttacking)
-        {
-            ChangeAnimation(idleAnimation);
-        }
+            if (Mathf.Abs(navMeshAgent.velocity.x) > speedThreshold || Mathf.Abs(navMeshAgent.velocity.z) > speedThreshold)
+            {
+                ChangeAnimation(walkingAnimation);
+            }
+            else
+            {
+                ChangeAnimation(idleAnimation);
+            }
 
-        if (player != null)
-        {
-            FollowPlayer(player);
+            if (player != null)
+            {
+                FollowPlayer(player);
+            }
         }
     }
 

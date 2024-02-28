@@ -2,19 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour, ISpawnable
 {
-    [SerializeField] private List<GameObject> spawnPoints;
-
-    private void Start()
+    public void SpawnEnemy(string enemy, Transform enemyPosition)
     {
-        SpawnZombie();
-    }
-
-    private void SpawnZombie()
-    {
-        GameObject zombieInstance = 
-            ObjectPooler.Instance.SpawnFromPool
-            ("Zombie", spawnPoints[0].gameObject.transform.position, spawnPoints[0].gameObject.transform.rotation);
+        ObjectPooler.Instance.SpawnFromPool(enemy, enemyPosition.position, enemyPosition.rotation);
     }
 }
