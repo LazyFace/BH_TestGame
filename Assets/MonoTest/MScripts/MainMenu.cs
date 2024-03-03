@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
     }
     public void MapSelected(int map)
     {
-        SceneManager.LoadScene(map);
+        LevelLoader.instance.ChangeScene(map);
     }
 
     public void PlayersNumber(int players)
