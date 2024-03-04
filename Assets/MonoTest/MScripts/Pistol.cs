@@ -29,7 +29,7 @@ public class Pistol : MonoBehaviour, IShootable
             if(Time.time > nextFire)
             {
                 //instantiate bullet
-                GameObject bulletInstance = ObjectPooler.Instance.SpawnFromPool("Bullet", firePosition.position, firePosition.rotation);
+                GameObject bulletInstance = ObjectPooler.Instance.SpawnFromPool(ObjectPooler.ObjectsToSpawn.BULLET, firePosition.position, firePosition.rotation);
                 bulletInstance.GetComponent<Bullet>().SetBulletDamage(pistol.gunDamage);
 
                 pistol.totalAmmo--;

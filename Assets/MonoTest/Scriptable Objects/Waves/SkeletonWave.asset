@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94a759b3d31b7904ab4596517b383d28, type: 3}
-  m_Name: Ghost
+  m_Script: {fileID: 11500000, guid: ee7115e98dcb0d449887f984401c23eb, type: 3}
+  m_Name: SkeletonWave
   m_EditorClassIdentifier: 
-  health: 60
-  speed: 3.5
-  damage: 20
+  numZombies: 0
+  numSkeletons: 10
+  numGhosts: 0

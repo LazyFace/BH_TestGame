@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private PlayerConfig_SO playerData;
     [SerializeField] private WeaponHolder weaponHolder;
 
+    [SerializeField] private float rotationSpeed = 10f;
+
     private int health;
     private bool isDeath = false;
 
@@ -117,7 +119,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         Vector3 moveVector = movementInput * playerData.speed;
         playerRB.velocity = new Vector3(moveVector.x, playerRB.velocity.y, moveVector.z);
-        Mathf.Clamp(playerRB.velocity.magnitude, 0f, 10f);
+        playerRB.velocity = Vector3.ClampMagnitude(playerRB.velocity, 10f);
     }
 
     private void RotatePlayer()
@@ -133,7 +135,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
             // Suaviza la transición hacia la nueva rotación.
-            playerRB.rotation = Quaternion.Slerp(playerRB.rotation, toRotation, Time.deltaTime * 15f);
+            playerRB.rotation = Quaternion.Slerp(playerRB.rotation, toRotation, Time.deltaTime * rotationSpeed);
         }
     }
 

@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         rb.velocity = Vector3.zero;
+        StartCoroutine(DisableBullet());
     }
 
     private void Update()
@@ -24,14 +25,23 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (!collision.gameObject.CompareTag("Player"))
         {
-            IDamageable damage = collision.gameObject.GetComponent<IDamageable>();
-            damage.GetDamaged(weaponDamage);
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                IDamageable damage = collision.gameObject.GetComponent<IDamageable>();
+                damage.GetDamaged(weaponDamage);
+            }
+
+            Debug.Log(collision.gameObject.name);
+
+            gameObject.SetActive(false);
         }
+    }
 
-        Debug.Log(collision.gameObject.name);
-
+    private IEnumerator DisableBullet()
+    {
+        yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
     }
 
@@ -43,6 +53,6 @@ public class Bullet : MonoBehaviour
     private void BulletInitialVelocity()
     {
         rb.AddForce(transform.forward * 500f, ForceMode.Force);
-        Mathf.Clamp(rb.velocity.magnitude, 0f, 50f);
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, 50f);
     }
 }
