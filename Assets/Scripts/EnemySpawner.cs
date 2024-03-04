@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour, ISpawnable
+public class EnemySpawner : MonoBehaviour
 {
-    public void SpawnEnemy(string enemy, Transform enemyPosition)
+    public void SpawnEnemy(ObjectPooler.ObjectsToSpawn enemy, Transform spawnPosition, Action callback)
     {
-        ObjectPooler.Instance.SpawnFromPool(enemy, enemyPosition.position, enemyPosition.rotation);
+        GameObject enemyInstance = ObjectPooler.Instance.SpawnFromPool(enemy, spawnPosition.position, spawnPosition.rotation);
+        enemyInstance.GetComponent<EnemyController>().Initialize(callback);
     }
 }

@@ -18,18 +18,26 @@ public class ObjectPooler : MonoBehaviour
     [System.Serializable]
     public class Pool
     {
-        public string tag;
+        public ObjectsToSpawn tag;
         public GameObject prefab;
         public int size;
     }
 
     public List<Pool> pools;
 
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
+    public Dictionary<ObjectsToSpawn, Queue<GameObject>> poolDictionary;
+
+    public enum ObjectsToSpawn
+    {
+        BULLET,
+        ZOMBIE,
+        SKELETON,
+        GHOST
+    }
 
     private void Start()
     {
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        poolDictionary = new Dictionary<ObjectsToSpawn, Queue<GameObject>>();
 
         foreach (Pool pool in pools)
         {
@@ -46,16 +54,16 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
+    public GameObject SpawnFromPool(ObjectsToSpawn objectToSpawnName, Vector3 position, Quaternion rotation)
     {
-        if (!poolDictionary.ContainsKey(tag)) { Debug.LogWarning("Pool with tag " + tag + " not exist"); return null; }
+        if (!poolDictionary.ContainsKey(objectToSpawnName)) { Debug.LogWarning("Pool with tag " + objectToSpawnName + " not exist"); return null; }
 
-        GameObject  objectToSpawn = poolDictionary[tag].Dequeue();
+        GameObject objectToSpawn = poolDictionary[objectToSpawnName].Dequeue();
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
 
-        poolDictionary[tag].Enqueue(objectToSpawn);
+        poolDictionary[objectToSpawnName].Enqueue(objectToSpawn);
 
         return objectToSpawn;
     }

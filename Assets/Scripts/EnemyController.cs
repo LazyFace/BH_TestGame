@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,11 +21,14 @@ public class EnemyController : MonoBehaviour, IDamageable
     //Animation references
     private Animator animator;
     private string currentState;
-    const string idleAnimation = "idle";
-    const string walkingAnimation = "walk";
-    const string attackRightAnimation = "attackRight";
-    const string attackLeftAnimation = "attackLeft";
-    const string dieAnimation = "die";
+
+    private Action OnEnemyDeath;
+
+    static readonly AnimationData idleAnimation = new AnimationData("idle", true);
+    static readonly AnimationData walkingAnimation = new AnimationData("walk", true);
+    static readonly AnimationData attackRightAnimation = new AnimationData("attackRight", false);
+    static readonly AnimationData attackLeftAnimation = new AnimationData("attackLeft", false);
+    static readonly AnimationData dieAnimation = new AnimationData("die", false);
 
     private void Awake()
     {
@@ -52,7 +57,16 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Attack(other.gameObject);
+            StartCoroutine(Attack(other.gameObject));
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            StopCoroutine(Attack(other.gameObject));
+            isAttacking = false;
         }
     }
 
@@ -65,15 +79,17 @@ public class EnemyController : MonoBehaviour, IDamageable
         }
     }
 
-    private void Attack(GameObject player)
+    private IEnumerator Attack(GameObject player)
     {
         if (!isDeath) 
         {
             isAttacking = true;
             player.gameObject.GetComponent<IDamageable>().GetDamaged(damage);
-            ChangeAnimation(attackRightAnimation);
+            ChangeAnimation(attackRightAnimation.animationName, attackRightAnimation.isLoop);
             Debug.Log("Atacó");
         }
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(Attack(player));
     }
 
     private void EnemyAnimationsHandler()
@@ -84,11 +100,11 @@ public class EnemyController : MonoBehaviour, IDamageable
         {
             if (Mathf.Abs(navMeshAgent.velocity.x) > speedThreshold || Mathf.Abs(navMeshAgent.velocity.z) > speedThreshold)
             {
-                ChangeAnimation(walkingAnimation);
+                ChangeAnimation(walkingAnimation.animationName, walkingAnimation.isLoop);
             }
             else
             {
-                ChangeAnimation(idleAnimation);
+                ChangeAnimation(idleAnimation.animationName, idleAnimation.isLoop);
             }
 
             if (player != null)
@@ -110,21 +126,22 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void Die()
     {
         isDeath = true;
-        ChangeAnimation(dieAnimation);
-        while(isAnimationPlaying(animator, dieAnimation))
+        ChangeAnimation(dieAnimation.animationName, dieAnimation.isLoop);
+        while(isAnimationPlaying(animator, dieAnimation.animationName))
         {
             Debug.Log("Anim playing");
         }
+        OnEnemyDeath?.Invoke();
         gameObject.SetActive(false);
     }
 
-    private void ChangeAnimation(string newState)
+    private void ChangeAnimation(string newState, bool isLoop)
     {
-        if (newState == currentState)
+        if(isLoop && newState == currentState)
         {
             return;
         }
-
+        animator.Rebind();
         animator.Play(newState);
     }
 
@@ -138,5 +155,15 @@ public class EnemyController : MonoBehaviour, IDamageable
         {
             return false;
         }
+    }
+
+    private void OnDisable()
+    {
+        OnEnemyDeath = null;
+    }
+
+    public void Initialize(Action callback)
+    {
+        OnEnemyDeath += callback;
     }
 }
