@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3508809888940917354}
   - component: {fileID: 3173388484589687130}
   - component: {fileID: 4463183407775507191}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 8482434107258317901}
   - component: {fileID: 5932190314098514055}
   - component: {fileID: 8371614382716594278}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: foamBulletB-low
   m_TagString: Untagged
   m_Icon: {fileID: 0}

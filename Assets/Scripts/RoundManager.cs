@@ -25,7 +25,10 @@ public class RoundManager : MonoBehaviour
 
     private void StartRound()
     {
-        StartCoroutine(GenerateEnemies(SelectWaveType()));
+        Wave_SO currentWave = SelectWaveType();
+        StartCoroutine(GenerateEnemies(ObjectPooler.ObjectsToSpawn.ZOMBIE, currentWave.numZombies));
+        StartCoroutine(GenerateEnemies(ObjectPooler.ObjectsToSpawn.SKELETON, currentWave.numSkeletons));
+        StartCoroutine(GenerateEnemies(ObjectPooler.ObjectsToSpawn.GHOST, currentWave.numGhosts));
     }
 
     private IEnumerator WaitAndStartNextRound(float waitTime)
@@ -78,33 +81,15 @@ public class RoundManager : MonoBehaviour
         return selectedWave;
     }
 
-    private IEnumerator GenerateEnemies(Wave_SO selectedWave)
+    private IEnumerator GenerateEnemies(ObjectPooler.ObjectsToSpawn enemyToSpawn, int enemiesToSpawn)
     {
-        int lastZombieSpawnIndex = -1;
-        int lastSkeletonSpawnIndex = -1;
-        int lastGhostSpawnIndex = -1;
+        int lastSpawnIndex = -1;
 
-        for (int i = 0; i < selectedWave.numZombies; i++)
+        for (int i = 0; i < (enemiesToSpawn + (1 * currentRound)); i++)
         {
-            int spawnIndex = GetUniqueSpawnIndex(lastZombieSpawnIndex, enemySpawnPoints.Length);
-            lastZombieSpawnIndex = spawnIndex;
-            spawner.SpawnEnemy(ObjectPooler.ObjectsToSpawn.ZOMBIE, enemySpawnPoints[spawnIndex].transform, EnemyDefeated);
-            yield return new WaitForSeconds(1f);
-        }
-
-        for (int i = 0; i < selectedWave.numSkeletons; i++)
-        {
-            int spawnIndex = GetUniqueSpawnIndex(lastSkeletonSpawnIndex, enemySpawnPoints.Length);
-            lastSkeletonSpawnIndex = spawnIndex;
-            spawner.SpawnEnemy(ObjectPooler.ObjectsToSpawn.SKELETON, enemySpawnPoints[spawnIndex].transform, EnemyDefeated);
-            yield return new WaitForSeconds(1f);
-        }
-
-        for (int i = 0; i < selectedWave.numGhosts; i++)
-        {
-            int spawnIndex = GetUniqueSpawnIndex(lastGhostSpawnIndex, enemySpawnPoints.Length);
-            lastGhostSpawnIndex = spawnIndex;
-            spawner.SpawnEnemy(ObjectPooler.ObjectsToSpawn.GHOST, enemySpawnPoints[spawnIndex].transform, EnemyDefeated);
+            int spawnIndex = GetUniqueSpawnIndex(lastSpawnIndex, enemySpawnPoints.Length);
+            lastSpawnIndex = spawnIndex;
+            spawner.SpawnEnemy(enemyToSpawn, enemySpawnPoints[spawnIndex].transform, EnemyDefeated);
             yield return new WaitForSeconds(1f);
         }
     }
