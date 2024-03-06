@@ -59,7 +59,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (!isDeath && other.gameObject.CompareTag("Player"))
         {
             attackCoroutine = StartCoroutine(Attack(other.gameObject));
         }
@@ -67,7 +67,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (!isDeath && other.gameObject.CompareTag("Player"))
         {
             StopCoroutine(attackCoroutine);
             attackCoroutine = null;
@@ -78,7 +78,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void FollowPlayer(GameObject player)
     {
         float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
-        if (distanceFromPlayer > 2f)
+        if (!isDeath && distanceFromPlayer > 2f)
         {
             GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
         }
@@ -100,10 +100,10 @@ public class EnemyController : MonoBehaviour, IDamageable
                 ChangeAnimation(attackLeftAnimation.animationName, attackLeftAnimation.isLoop);
             }
 
-            //Debug.Log("Atacó");
+            isAttackingRight = !isAttackingRight;
         }
         yield return new WaitForSeconds(1f);
-        StartCoroutine(Attack(player));
+        attackCoroutine = StartCoroutine(Attack(player));
     }
 
     private void EnemyAnimationsHandler()
@@ -131,7 +131,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void GetDamaged(int damageAmount)
     {
         health -= damageAmount;
-        if(health < 0)
+        if(!isDeath && health < 0)
         {
             Die();
         }
@@ -147,7 +147,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         isDeath = true;
         ChangeAnimation(dieAnimation.animationName, dieAnimation.isLoop);
 
-        yield return new WaitUntil(() => !isAnimationPlaying(animator, dieAnimation.animationName));
+        yield return new WaitForSeconds(1.2f); //new WaitUntil(() => !isAnimationPlaying(animator, dieAnimation.animationName));
 
         OnEnemyDeath?.Invoke();
         gameObject.SetActive(false);

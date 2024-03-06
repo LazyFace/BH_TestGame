@@ -59,9 +59,10 @@ public class ObjectPooler : MonoBehaviour
         if (!poolDictionary.ContainsKey(objectToSpawnName)) { Debug.LogWarning("Pool with tag " + objectToSpawnName + " not exist"); return null; }
 
         GameObject objectToSpawn = poolDictionary[objectToSpawnName].Dequeue();
-        objectToSpawn.SetActive(true);
+        
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
+        objectToSpawn.SetActive(true);
 
         poolDictionary[objectToSpawnName].Enqueue(objectToSpawn);
 
