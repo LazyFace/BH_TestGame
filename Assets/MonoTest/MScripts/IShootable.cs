@@ -7,4 +7,6 @@ public interface IShootable
     void Reload();
 
     Transform TakeGrabPosition();
+
+    void FillAmmo();
 }

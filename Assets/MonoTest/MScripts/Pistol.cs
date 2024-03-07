@@ -26,7 +26,7 @@ public class Pistol : MonoBehaviour, IShootable
         //Debug.Log("Si entre");
         if (pistol.currentMagazineAmmo > 0 && !pistol.reloading)
         {
-            if(Time.time > nextFire)
+            if (Time.time > nextFire)
             {
                 //instantiate bullet
                 GameObject bulletInstance = ObjectPooler.Instance.SpawnFromPool(ObjectPooler.ObjectsToSpawn.BULLET, firePosition.position, firePosition.rotation);
@@ -62,5 +62,10 @@ public class Pistol : MonoBehaviour, IShootable
     public Transform TakeGrabPosition()
     {
         return grabPosition;
+    }
+
+    public void FillAmmo()
+    {
+        pistol.totalAmmo = pistol.maxAmmo;
     }
 }
