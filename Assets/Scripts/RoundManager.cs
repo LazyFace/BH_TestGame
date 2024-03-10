@@ -26,6 +26,7 @@ public class RoundManager : MonoBehaviour
     private void StartRound()
     {
         Wave_SO currentWave = SelectWaveType();
+
         StartCoroutine(GenerateEnemies(ObjectPooler.ObjectsToSpawn.ZOMBIE, currentWave.numZombies));
         StartCoroutine(GenerateEnemies(ObjectPooler.ObjectsToSpawn.SKELETON, currentWave.numSkeletons));
         StartCoroutine(GenerateEnemies(ObjectPooler.ObjectsToSpawn.GHOST, currentWave.numGhosts));

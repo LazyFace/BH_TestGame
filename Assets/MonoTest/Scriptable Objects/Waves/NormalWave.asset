@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7115e98dcb0d449887f984401c23eb, type: 3}
   m_Name: NormalWave
   m_EditorClassIdentifier: 
-  numZombies: 0
-  numSkeletons: 0
-  numGhosts: 0
+  numZombies: 5
+  numSkeletons: 3
+  numGhosts: 2
