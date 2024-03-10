@@ -19,6 +19,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     public bool isAttacking = false;
     private bool isAttackingRight = true;
 
+    [SerializeField] private float rotationSpeed = 10f;
+
     //Animation references
     private Animator animator;
     private string currentState;
@@ -49,17 +51,27 @@ public class EnemyController : MonoBehaviour, IDamageable
         navMeshAgent.speed = speed;
     }
 
+    private void OnEnable()
+    {
+        isDeath = false;
+        navMeshAgent.isStopped = false;
+    }
+
     private void Update()
     {
         if (!isDeath)
         {
             EnemyAnimationsHandler();
+            if (player != null)
+            {
+                FollowPlayer(player);
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (!isDeath && other.gameObject.CompareTag("Player"))
         {
             attackCoroutine = StartCoroutine(Attack(other.gameObject));
         }
@@ -67,7 +79,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (!isDeath && other.gameObject.CompareTag("Player"))
         {
             StopCoroutine(attackCoroutine);
             attackCoroutine = null;
@@ -78,10 +90,30 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void FollowPlayer(GameObject player)
     {
         float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
-        if (distanceFromPlayer > 2f)
+        if (!isDeath)
         {
-            GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
+            if (distanceFromPlayer > 2f)
+            {
+                navMeshAgent.SetDestination(player.transform.position);
+            }
+            else
+            {
+                LookPlayer(player);
+            }
         }
+        else
+        {
+            navMeshAgent.isStopped = true;
+        }
+    }
+
+    private void LookPlayer(GameObject player)
+    {
+        Vector3 direction = player.transform.position - transform.position;
+        direction.y = 0;
+
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
 
     private IEnumerator Attack(GameObject player)
@@ -100,10 +132,10 @@ public class EnemyController : MonoBehaviour, IDamageable
                 ChangeAnimation(attackLeftAnimation.animationName, attackLeftAnimation.isLoop);
             }
 
-            //Debug.Log("Atacó");
+            isAttackingRight = !isAttackingRight;
         }
         yield return new WaitForSeconds(1f);
-        StartCoroutine(Attack(player));
+        attackCoroutine = StartCoroutine(Attack(player));
     }
 
     private void EnemyAnimationsHandler()
@@ -120,18 +152,13 @@ public class EnemyController : MonoBehaviour, IDamageable
             {
                 ChangeAnimation(idleAnimation.animationName, idleAnimation.isLoop);
             }
-
-            if (player != null)
-            {
-                FollowPlayer(player);
-            }
         }
     }
 
     public void GetDamaged(int damageAmount)
     {
         health -= damageAmount;
-        if(health < 0)
+        if(!isDeath && health < 0)
         {
             Die();
         }
@@ -147,7 +174,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         isDeath = true;
         ChangeAnimation(dieAnimation.animationName, dieAnimation.isLoop);
 
-        yield return new WaitUntil(() => !isAnimationPlaying(animator, dieAnimation.animationName));
+        yield return new WaitForSeconds(1.2f); //new WaitUntil(() => !isAnimationPlaying(animator, dieAnimation.animationName));
 
         OnEnemyDeath?.Invoke();
         gameObject.SetActive(false);
@@ -162,20 +189,6 @@ public class EnemyController : MonoBehaviour, IDamageable
         animator.Rebind();
         currentState = newState;
         animator.Play(newState);
-    }
-
-    private bool isAnimationPlaying(Animator animator, string animName)
-    {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName(animName) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
-        {
-            Debug.Log("True " + animator + " " + animName);
-            return true;
-        }
-        else
-        {
-            Debug.Log("False " + animator + " " + animName);
-            return false;
-        }
     }
 
     private void OnDisable()

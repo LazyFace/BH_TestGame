@@ -7,6 +7,7 @@ public class Pistol : MonoBehaviour, IShootable
     [SerializeField] private Transform grabPosition;
     [SerializeField] private Transform firePosition;
     [SerializeField] private Bullet bullet;
+    [SerializeField] private AudioSource shotSound;
 
     private float nextFire = 0.0f;
 
@@ -31,6 +32,8 @@ public class Pistol : MonoBehaviour, IShootable
                 //instantiate bullet
                 GameObject bulletInstance = ObjectPooler.Instance.SpawnFromPool(ObjectPooler.ObjectsToSpawn.BULLET, firePosition.position, firePosition.rotation);
                 bulletInstance.GetComponent<Bullet>().SetBulletDamage(pistol.gunDamage);
+                if(shotSound != null)
+                    shotSound.Play();
 
                 pistol.totalAmmo--;
                 pistol.currentMagazineAmmo--;

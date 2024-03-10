@@ -5,10 +5,18 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     private Rigidbody rb;
+
     private Animator animator;
     private string currentState;
-    const string idleAnimation = "idle";
-    const string walkingAnimation = "walk";
+
+    //Animations
+    static readonly AnimationData idleAnimation = new AnimationData("idle", true);
+    static readonly AnimationData walkingAnimation = new AnimationData("walk", true);
+    static readonly AnimationData holdingRight = new AnimationData("holdingRight", false);
+    static readonly AnimationData rightShoot = new AnimationData("holdinRightShoot", false);
+
+    //Audio
+    [SerializeField] private AudioSource audioSource;
 
     private void Awake()
     {
@@ -23,27 +31,28 @@ public class PlayerAnimationController : MonoBehaviour
 
         if (Mathf.Abs(rb.velocity.x) > speedThreshold || Mathf.Abs(rb.velocity.z) > speedThreshold)
         {
-            ChangeAnimation(walkingAnimation);
+            audioSource.Play();
+            ChangeAnimation(walkingAnimation.animationName, idleAnimation.isLoop);
         }
         else
         {
-            ChangeAnimation(idleAnimation);
+            audioSource.Stop();
+            ChangeAnimation(idleAnimation.animationName, idleAnimation.isLoop);
         }
 
         //Debug.Log("Velocidad X  " + rb.velocity.x);
         //Debug.Log("Velocidad Z  " + rb.velocity.z);
     }
 
-    private void ChangeAnimation(string newState)
+    private void ChangeAnimation(string newState, bool isLoop)
     {
-        if (newState == currentState)
+        if (isLoop && newState == currentState)
         {
             return;
         }
-
-        animator.Play(newState);
-
+        animator.Rebind();
         currentState = newState;
+        animator.Play(newState);
     }
 
     private bool isAnimationPlaying(Animator animator, string animName)

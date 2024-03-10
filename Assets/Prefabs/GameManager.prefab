@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2912439040619873311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2912439040619873310}
+  - component: {fileID: 2912439040619873305}
+  - component: {fileID: 2912439040619873307}
+  - component: {fileID: 2912439040619873304}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2912439040619873310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912439040619873311}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2912439040619873305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912439040619873311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7128ee1b234b3574a9ef89e0eb741093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: 0
+    prefab: {fileID: 4246714308168269200, guid: 7ca822a2d941ea74185c9507bf463f13, type: 3}
+    size: 20
+  - tag: 1
+    prefab: {fileID: 6398713238864441585, guid: de3b88608fafa3949ab739c07d95adae, type: 3}
+    size: 50
+  - tag: 2
+    prefab: {fileID: 4739649733604015933, guid: a03ca926110a7c441841efc6a90606f0, type: 3}
+    size: 50
+  - tag: 3
+    prefab: {fileID: 8590957082125844131, guid: e82cd304c55f9e44e9c9fd4eacaa8528, type: 3}
+    size: 50
+--- !u!114 &2912439040619873307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912439040619873311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: badf4277940a44740a7385eb244714b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRound: 1
+  timeBetweenRounds: 10
+  spawner: {fileID: 2912439040619873304}
+  enemySpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  normalWave: {fileID: 11400000, guid: db93e521009a29e4fad8af3da8ce6320, type: 2}
+  zombiesWave: {fileID: 11400000, guid: d0b720d4e19b3c242a1a05da384c0d5d, type: 2}
+  skeletonsWave: {fileID: 11400000, guid: 172ae0d1cb6c26e458f160619055fc34, type: 2}
+  ghostsWave: {fileID: 11400000, guid: 3e1d7c9147e3c3440a0a4603aee7195d, type: 2}
+--- !u!114 &2912439040619873304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912439040619873311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7565397fbf56d4749842a159d5ab1fc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
