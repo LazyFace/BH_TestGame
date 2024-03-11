@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Pistol : MonoBehaviour, IShootable
 {
-    [SerializeField] private Weapon_SO pistol;
+    [SerializeField] private Weapon_SO weaponData;
     [SerializeField] private Transform grabPosition;
     [SerializeField] private Transform firePosition;
     [SerializeField] private Bullet bullet;
@@ -13,8 +13,8 @@ public class Pistol : MonoBehaviour, IShootable
 
     private void Start()
     {
-        pistol.currentMagazineAmmo = pistol.magazineSize;
-        pistol.totalAmmo = pistol.maxAmmo;
+        weaponData.currentMagazineAmmo = weaponData.magazineSize;
+        weaponData.totalAmmo = weaponData.maxAmmo;
     }
 
     private void Update()
@@ -25,41 +25,41 @@ public class Pistol : MonoBehaviour, IShootable
     public void Fire()
     {
         //Debug.Log("Si entre");
-        if (pistol.currentMagazineAmmo > 0 && !pistol.reloading)
+        if (weaponData.currentMagazineAmmo > 0 && !weaponData.reloading)
         {
             if (Time.time > nextFire)
             {
                 //instantiate bullet
                 GameObject bulletInstance = ObjectPooler.Instance.SpawnFromPool(ObjectPooler.ObjectsToSpawn.BULLET, firePosition.position, firePosition.rotation);
-                bulletInstance.GetComponent<Bullet>().SetBulletDamage(pistol.gunDamage);
+                bulletInstance.GetComponent<Bullet>().SetBulletDamage(weaponData.gunDamage);
                 if(shotSound != null)
                     shotSound.Play();
 
-                pistol.totalAmmo--;
-                pistol.currentMagazineAmmo--;
-                nextFire = Time.time + pistol.fireRate;
+                weaponData.totalAmmo--;
+                weaponData.currentMagazineAmmo--;
+                nextFire = Time.time + weaponData.fireRate;
             }
         }
     }
 
     public void Reload()
     {
-        pistol.reloading = true;
+        weaponData.reloading = true;
         StartCoroutine(ReloadingGunCoroutine());
     }
 
     private IEnumerator ReloadingGunCoroutine()
     {
-        yield return new WaitForSeconds(pistol.reloadTime);
-        if (pistol.totalAmmo > pistol.magazineSize)
+        if (weaponData.totalAmmo > weaponData.magazineSize)
         {
-            pistol.currentMagazineAmmo = pistol.magazineSize;
+            weaponData.currentMagazineAmmo = weaponData.magazineSize;
         }
-        else if (pistol.totalAmmo <= pistol.magazineSize)
+        else if (weaponData.totalAmmo <= weaponData.magazineSize)
         {
-            pistol.currentMagazineAmmo = pistol.totalAmmo;
+            weaponData.currentMagazineAmmo = weaponData.totalAmmo;
         }
-        pistol.reloading = false;
+        yield return new WaitForSeconds(weaponData.reloadTime);
+        weaponData.reloading = false;
     }
 
     public Transform TakeGrabPosition()
@@ -69,6 +69,6 @@ public class Pistol : MonoBehaviour, IShootable
 
     public void FillAmmo()
     {
-        pistol.totalAmmo = pistol.maxAmmo;
+        weaponData.totalAmmo = weaponData.maxAmmo;
     }
 }

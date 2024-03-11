@@ -9,8 +9,9 @@ public class Ammo : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            IShootable shootable = other.gameObject.GetComponentInChildren<IShootable>();
-            shootable.FillAmmo();
+            WeaponHolder weaponHolder = other.gameObject.GetComponentInChildren<WeaponHolder>();
+            weaponHolder.FillAllAmmo();
+            this.gameObject.SetActive(false);   
         }
     }
 }

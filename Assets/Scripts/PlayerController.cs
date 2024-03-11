@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
@@ -12,9 +13,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private PlayerConfig_SO playerData;
     [SerializeField] private WeaponHolder weaponHolder;
 
+    [SerializeField] private UnityEvent<int> onPlayerDamaged;
+
     [SerializeField] private float rotationSpeed = 10f;
 
-    private int health;
     private bool isDeath = false;
 
     private void Awake()
@@ -24,7 +26,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             playerRB = GetComponent<Rigidbody>();
         }
 
-        health = playerData.health;
+        playerData.currentHealth = playerData.maxHealth;
     }
 
     private void Update()
@@ -141,8 +143,11 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void GetDamaged(int damageAmount)
     {
-        health -= damageAmount;
-        if (health < 0)
+        playerData.currentHealth -= damageAmount;
+
+        onPlayerDamaged?.Invoke(playerData.currentHealth);
+
+        if (playerData.currentHealth < 0)
         {
             Die();
         }

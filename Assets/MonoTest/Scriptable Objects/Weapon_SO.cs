@@ -6,7 +6,7 @@ using UnityEngine;
 public class Weapon_SO : ScriptableObject
 {
     [Header("Info")]
-    //public string name;
+    public string weaponName;
 
     [Header("Shooting")]
     public float fireRate;

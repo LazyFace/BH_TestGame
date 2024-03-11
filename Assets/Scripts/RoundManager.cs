@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RoundManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class RoundManager : MonoBehaviour
     private int enemiesRemaining;
 
     [SerializeField] private EnemySpawner spawner;
+
+    [SerializeField] private UnityEvent onStartRound;
 
     [SerializeField] private GameObject[] enemySpawnPoints;
 
@@ -34,6 +37,7 @@ public class RoundManager : MonoBehaviour
 
     private IEnumerator WaitAndStartNextRound(float waitTime)
     {
+        onStartRound?.Invoke(); 
         yield return new WaitForSeconds(waitTime);
 
         currentRound++;

@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aefba294dcf38f54f8b5e14eefbd35f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pistol: {fileID: 11400000, guid: 57ba10d5e037fcf41a12df8020521e78, type: 2}
+  weaponData: {fileID: 11400000, guid: 57ba10d5e037fcf41a12df8020521e78, type: 2}
   grabPosition: {fileID: 984156689412423964}
   firePosition: {fileID: 3794380271482673845}
   bullet: {fileID: 4463183407775507191, guid: 7ca822a2d941ea74185c9507bf463f13, type: 3}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2767cd982528ff8438f56b55ba55a5ff, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
+  weaponName: PISTOL
   fireRate: 0.5
   gunDamage: 30
   maxDistance: 50

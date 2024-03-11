@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlayerConfig_SO : ScriptableObject
 {
     [Header("Player Info")]
-    public int health;
+    public int maxHealth;
+    public int currentHealth;
     public float speed;
 
     [Header("Input Buttons")]

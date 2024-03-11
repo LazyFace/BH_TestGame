@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponHolder : MonoBehaviour
 {
     private int gunsIndex = 0;
     private float switchGunTime = 0.5f;
 
+    
     private List<GameObject> gunList = new List<GameObject>();
 
+    [SerializeField] private List<Weapon_SO> weaponsData = new List<Weapon_SO>();
     [SerializeField] private WeaponHolder_SO weapon;
+
+    [SerializeField] private UnityEvent<string, int, int> onWeaponUsed;
 
     private void Start()
     {
         InstantiateWeapons();
+        weapon.isSwitchingWeapon = false;
     }
 
     private void InstantiateWeapons()
@@ -34,10 +38,18 @@ public class WeaponHolder : MonoBehaviour
                 weaponInstantiated.SetActive(false);    
             }
         }
+        StartCoroutine(InitializeWeaponDataHUD());
+    }
+
+    private IEnumerator InitializeWeaponDataHUD()
+    {
+        yield return new WaitForSeconds(0.5f);
+        onWeaponUsed?.Invoke(weaponsData[gunsIndex].weaponName, weaponsData[gunsIndex].currentMagazineAmmo, weaponsData[gunsIndex].totalAmmo);
     }
 
     public void ChangeWeapon()
     {
+        weapon.isSwitchingWeapon = true;
         StartCoroutine(ChangeWeaponCoroutine());
     }
 
@@ -53,25 +65,43 @@ public class WeaponHolder : MonoBehaviour
         yield return new WaitForSeconds(switchGunTime);
         //Debug.Log(gunsIndex);
         gunList[gunsIndex].SetActive(true);
+        weapon.isSwitchingWeapon = false;
 
-    }
-
-    private IShootable TakeActualWeaponFunctions()
-    {
-        IShootable shootable = gunList[gunsIndex].GetComponentInChildren<IShootable>();
-        return shootable;
+        onWeaponUsed?.Invoke(weaponsData[gunsIndex].weaponName, weaponsData[gunsIndex].currentMagazineAmmo, weaponsData[gunsIndex].totalAmmo);
     }
 
     public void Shoot()
     {
-        IShootable shootable = TakeActualWeaponFunctions();
-        shootable?.Fire();
+        if(!weapon.isSwitchingWeapon) 
+        {
+            IShootable shootable = gunList[gunsIndex].GetComponentInChildren<IShootable>();           
+            shootable?.Fire();
+
+            onWeaponUsed?.Invoke(weaponsData[gunsIndex].weaponName, weaponsData[gunsIndex].currentMagazineAmmo, weaponsData[gunsIndex].totalAmmo);
+        }
     }
 
     public void Reload()
     {
-        IShootable shootable = TakeActualWeaponFunctions();
-        shootable?.Reload();
+       if(!weapon.isSwitchingWeapon)
+        {
+            IShootable shootable = gunList[gunsIndex].GetComponentInChildren<IShootable>();
+            shootable?.Reload();
+
+            onWeaponUsed?.Invoke(weaponsData[gunsIndex].weaponName, weaponsData[gunsIndex].currentMagazineAmmo, weaponsData[gunsIndex].totalAmmo);
+            
+        }
+    }
+
+    public void FillAllAmmo()
+    {
+        foreach(GameObject gun in gunList)
+        {
+            IShootable shootable = gun.GetComponentInChildren<IShootable>();
+            shootable.FillAmmo();
+
+            onWeaponUsed?.Invoke(weaponsData[gunsIndex].weaponName, weaponsData[gunsIndex].currentMagazineAmmo, weaponsData[gunsIndex].totalAmmo);
+        }
     }
 
 }
