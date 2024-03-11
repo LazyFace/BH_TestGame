@@ -5,4 +5,5 @@ using UnityEngine;
 public class WeaponHolder_SO : ScriptableObject
 {
     public GameObject[] weapons;
+    public bool isSwitchingWeapon;
 }
