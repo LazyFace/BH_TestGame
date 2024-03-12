@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private WeaponHolder weaponHolder;
 
     [SerializeField] private UnityEvent<int> onPlayerDamaged;
+    [SerializeField] private UnityEvent onPlayerShoot;
 
     [SerializeField] private float rotationSpeed = 10f;
 
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (Input.GetKey(playerData.shootGun))
         {
             weaponHolder.Shoot();
+            onPlayerShoot?.Invoke();
         }
     }
 
@@ -156,5 +158,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void Die()
     {
         isDeath = true;
+        GameManager.Instance.GameLost();
     }
 }

@@ -28,6 +28,7 @@ public class RoundManager : MonoBehaviour
 
     private void StartRound()
     {
+        Debug.Log("Round Started");
         Wave_SO currentWave = SelectWaveType();
 
         StartCoroutine(GenerateEnemies(ObjectPooler.ObjectsToSpawn.ZOMBIE, currentWave.numZombies));
@@ -37,9 +38,10 @@ public class RoundManager : MonoBehaviour
 
     private IEnumerator WaitAndStartNextRound(float waitTime)
     {
+        Debug.Log("Waiting Next Round");
         onStartRound?.Invoke(); 
         yield return new WaitForSeconds(waitTime);
-
+        Debug.Log("Ready Next Round");
         currentRound++;
         StartRound();
     }
@@ -47,6 +49,7 @@ public class RoundManager : MonoBehaviour
     public void EnemyDefeated()
     {
         enemiesRemaining--;
+        Debug.Log("Enemigos Faltantes: " + enemiesRemaining);
 
         if (enemiesRemaining <= 0)
         {
@@ -80,23 +83,21 @@ public class RoundManager : MonoBehaviour
                 roundType = 1;
             }
         }
-
-        enemiesRemaining = selectedWave.numZombies + selectedWave.numSkeletons + selectedWave.numGhosts;
-
         return selectedWave;
     }
 
     private IEnumerator GenerateEnemies(ObjectPooler.ObjectsToSpawn enemyToSpawn, int enemiesToSpawn)
     {
         int lastSpawnIndex = -1;
-
-        for (int i = 0; i < (enemiesToSpawn + (1 * currentRound)); i++)
+        int enemiesThisRound = enemiesToSpawn + (1 * currentRound);
+        for (int i = 0; i < enemiesThisRound; i++)
         {
             int spawnIndex = GetUniqueSpawnIndex(lastSpawnIndex, enemySpawnPoints.Length);
             lastSpawnIndex = spawnIndex;
             spawner.SpawnEnemy(enemyToSpawn, enemySpawnPoints[spawnIndex].transform, EnemyDefeated);
             yield return new WaitForSeconds(1f);
         }
+        enemiesRemaining += enemiesThisRound;
     }
 
     private int GetUniqueSpawnIndex(int lastIndex, int numOfSpawnPoints)

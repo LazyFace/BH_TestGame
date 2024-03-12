@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private float speed;
     private int damage;
     private bool isDeath = false;
-    public bool isAttacking = false;
+    private bool isAttacking = false;
     private bool isAttackingRight = true;
 
     [SerializeField] private float rotationSpeed = 10f;
@@ -173,9 +173,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         isDeath = true;
         ChangeAnimation(dieAnimation.animationName, dieAnimation.isLoop);
-
+        GameManager.Instance.AddPoints(100);
         yield return new WaitForSeconds(1.2f); //new WaitUntil(() => !isAnimationPlaying(animator, dieAnimation.animationName));
-
         OnEnemyDeath?.Invoke();
         gameObject.SetActive(false);
     }

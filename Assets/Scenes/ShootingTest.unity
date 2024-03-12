@@ -883,6 +883,17 @@ Transform:
   m_Father: {fileID: 468049578}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2106871993 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1690839404354717405, guid: b9de2cbfbdc28794b8207b5ef08b8d97, type: 3}
+  m_PrefabInstance: {fileID: 1690839404421975729}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3da3b6ff534b96469c521dd4d948b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1690839404421975729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -937,6 +948,34 @@ PrefabInstance:
     - target: {fileID: 1690839404354717402, guid: b9de2cbfbdc28794b8207b5ef08b8d97, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690839404354717404, guid: b9de2cbfbdc28794b8207b5ef08b8d97, type: 3}
+      propertyPath: onPlayerShoot.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690839404354717404, guid: b9de2cbfbdc28794b8207b5ef08b8d97, type: 3}
+      propertyPath: onPlayerShoot.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690839404354717404, guid: b9de2cbfbdc28794b8207b5ef08b8d97, type: 3}
+      propertyPath: onPlayerShoot.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2106871993}
+    - target: {fileID: 1690839404354717404, guid: b9de2cbfbdc28794b8207b5ef08b8d97, type: 3}
+      propertyPath: onPlayerShoot.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690839404354717404, guid: b9de2cbfbdc28794b8207b5ef08b8d97, type: 3}
+      propertyPath: onPlayerShoot.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayerShootAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690839404354717404, guid: b9de2cbfbdc28794b8207b5ef08b8d97, type: 3}
+      propertyPath: onPlayerShoot.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerAnimationController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690839404354717404, guid: b9de2cbfbdc28794b8207b5ef08b8d97, type: 3}
+      propertyPath: onPlayerShoot.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9de2cbfbdc28794b8207b5ef08b8d97, type: 3}
