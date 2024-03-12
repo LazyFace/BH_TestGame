@@ -90,20 +90,13 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void FollowPlayer(GameObject player)
     {
         float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
-        if (!isDeath)
+        if (!isDeath && distanceFromPlayer > 2f)
         {
-            if (distanceFromPlayer > 2f)
-            {
-                navMeshAgent.SetDestination(player.transform.position);
-            }
-            else
-            {
-                LookPlayer(player);
-            }
+            navMeshAgent.SetDestination(player.transform.position);
         }
         else
         {
-            navMeshAgent.isStopped = true;
+            LookPlayer(player);
         }
     }
 
@@ -172,6 +165,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     private IEnumerator DieCoroutine()
     {
         isDeath = true;
+        navMeshAgent.isStopped = true;
+        navMeshAgent.speed = 0f;
         ChangeAnimation(dieAnimation.animationName, dieAnimation.isLoop);
         GameManager.Instance.AddPoints(100);
         yield return new WaitForSeconds(1.2f); //new WaitUntil(() => !isAnimationPlaying(animator, dieAnimation.animationName));
