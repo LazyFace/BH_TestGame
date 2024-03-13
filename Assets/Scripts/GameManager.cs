@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [SerializeField] private TextMeshProUGUI pointsCountingUI;
+    [SerializeField] private UIHandler uiHandler;
 
-    private int points;
+    private int points = 0;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public void AddPoints(int pointsToAdd)
     {
         points += pointsToAdd;
-        pointsCountingUI.text = points.ToString();
+        uiHandler.UpdateScore(points);
     }
 
     public void GameLost()
@@ -37,5 +37,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        uiHandler.ActivateGameOverScreen();
     }
 }

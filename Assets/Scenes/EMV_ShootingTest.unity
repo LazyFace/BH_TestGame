@@ -576,6 +576,7 @@ GameObject:
   - component: {fileID: 538780425}
   - component: {fileID: 538780424}
   - component: {fileID: 538780423}
+  - component: {fileID: 538780427}
   m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
@@ -661,6 +662,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &538780427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538780422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0e442f2dec7af41b49723c87b53cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  weaponInfo: {fileID: 0}
+  scoreText: {fileID: 0}
+  finalScreen: {fileID: 0}
 --- !u!1 &565471754
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,6 +690,7 @@ GameObject:
   - component: {fileID: 565471756}
   - component: {fileID: 565471758}
   - component: {fileID: 565471757}
+  - component: {fileID: 565471759}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -770,6 +788,19 @@ MonoBehaviour:
   zombiesWave: {fileID: 11400000, guid: d0b720d4e19b3c242a1a05da384c0d5d, type: 2}
   skeletonsWave: {fileID: 11400000, guid: 172ae0d1cb6c26e458f160619055fc34, type: 2}
   ghostsWave: {fileID: 11400000, guid: 3e1d7c9147e3c3440a0a4603aee7195d, type: 2}
+--- !u!114 &565471759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565471754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384b2eb9423891d489eb2bfbcaa1daec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiHandler: {fileID: 979056307}
 --- !u!1 &920867998
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +914,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1420573614
 GameObject:
@@ -1087,6 +1118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 167672071375059986, guid: 321a36a16e098e74bb77f5d6ffb62c50, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 167672071375059987, guid: 321a36a16e098e74bb77f5d6ffb62c50, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1097,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 167672071375059987, guid: 321a36a16e098e74bb77f5d6ffb62c50, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 167672071375059987, guid: 321a36a16e098e74bb77f5d6ffb62c50, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1171,10 +1206,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4924707568263469083, guid: 321a36a16e098e74bb77f5d6ffb62c50, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 3466024331143368481}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 321a36a16e098e74bb77f5d6ffb62c50, type: 3}
 --- !u!1001 &1690839404421975729
@@ -1413,14 +1444,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3e5298e76df1e34a9d77daec62d871e, type: 3}
---- !u!114 &3466024331143368481 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8324052324243665724, guid: c3e5298e76df1e34a9d77daec62d871e, type: 3}
-  m_PrefabInstance: {fileID: 3466024331143368480}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8cba5244dc504842bcc15419c49ab52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

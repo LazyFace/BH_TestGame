@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 167672071375059986}
   - component: {fileID: 167672071375059985}
   - component: {fileID: 167672071375059984}
+  - component: {fileID: 370492432}
   m_Layer: 5
   m_Name: GameOverCanvas
   m_TagString: Untagged
@@ -102,6 +103,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &370492432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167672071375059983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8cba5244dc504842bcc15419c49ab52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4924707568089175965
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +372,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 370492432}
         m_TargetAssemblyTypeName: LevelLoaderAuxiliar, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 3
