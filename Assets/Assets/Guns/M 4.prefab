@@ -133,7 +133,7 @@ MonoBehaviour:
   grabPosition: {fileID: 0}
   firePosition: {fileID: 3794380271482673845}
   bullet: {fileID: 4463183407775507191, guid: 7ca822a2d941ea74185c9507bf463f13, type: 3}
-  shotSound: {fileID: 0}
+  shotSound: {fileID: 1998808387573887939}
 --- !u!82 &1998808387573887939
 AudioSource:
   m_ObjectHideFlags: 0

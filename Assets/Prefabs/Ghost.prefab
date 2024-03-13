@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 7fc007148ded3f34c8852ae53a87d1a5, type: 2}
-  isAttacking: 0
+  rotationSpeed: 10
 --- !u!1001 &8590957083140095492
 PrefabInstance:
   m_ObjectHideFlags: 0

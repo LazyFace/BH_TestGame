@@ -28,7 +28,7 @@ public class RoundManager : MonoBehaviour
 
     private void StartRound()
     {
-        Debug.Log("Round Started");
+        //Debug.Log("Round Started");
         Wave_SO currentWave = SelectWaveType();
 
         StartCoroutine(GenerateEnemies(ObjectPooler.ObjectsToSpawn.ZOMBIE, currentWave.numZombies));
@@ -38,10 +38,10 @@ public class RoundManager : MonoBehaviour
 
     private IEnumerator WaitAndStartNextRound(float waitTime)
     {
-        Debug.Log("Waiting Next Round");
+        //Debug.Log("Waiting Next Round");
         onStartRound?.Invoke(); 
         yield return new WaitForSeconds(waitTime);
-        Debug.Log("Ready Next Round");
+        //Debug.Log("Ready Next Round");
         currentRound++;
         StartRound();
     }
@@ -49,7 +49,7 @@ public class RoundManager : MonoBehaviour
     public void EnemyDefeated()
     {
         enemiesRemaining--;
-        Debug.Log("Enemigos Faltantes: " + enemiesRemaining);
+        //Debug.Log("Enemigos Faltantes: " + enemiesRemaining);
 
         if (enemiesRemaining <= 0)
         {

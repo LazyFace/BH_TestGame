@@ -10,9 +10,6 @@ public class PlayerAnimationController : MonoBehaviour
 
     private float speedAnimation;
 
-    //Audio
-    [SerializeField] private AudioSource audioSource;
-
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -26,13 +23,11 @@ public class PlayerAnimationController : MonoBehaviour
 
         if (Mathf.Abs(rb.velocity.x) > SPEEDTHRESHOLD || Mathf.Abs(rb.velocity.z) > SPEEDTHRESHOLD)
         {
-            audioSource.Play();
             animator.SetBool("isWalking", true);
             animator.SetFloat("speed", Mathf.Lerp(speedAnimation, 1f, Time.deltaTime * 10f));
         }
         else
         {
-            audioSource.Stop();
             animator.SetFloat("speed", Mathf.Lerp(speedAnimation, 0f, Time.deltaTime * 10f));
             animator.SetBool("isWalking", false);
         }

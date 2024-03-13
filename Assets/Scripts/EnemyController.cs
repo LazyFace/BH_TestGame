@@ -168,7 +168,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         navMeshAgent.isStopped = true;
         navMeshAgent.speed = 0f;
         ChangeAnimation(dieAnimation.animationName, dieAnimation.isLoop);
-        GameManager.Instance.AddPoints(100);
+        GameManager.Instance.AddPoints(enemyData.points);
         yield return new WaitForSeconds(1.2f); //new WaitUntil(() => !isAnimationPlaying(animator, dieAnimation.animationName));
         OnEnemyDeath?.Invoke();
         gameObject.SetActive(false);

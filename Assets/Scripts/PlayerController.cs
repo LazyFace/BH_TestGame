@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     //movement variables
     private Vector3 movementInput;
+    [SerializeField] private float rotationSpeed = 10f;
+    public bool hasBeenDamaged = false;
+    private bool isMoving = false;
 
     [SerializeField] private PlayerConfig_SO playerData;
     [SerializeField] private WeaponHolder weaponHolder;
@@ -16,7 +19,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private UnityEvent<int> onPlayerDamaged;
     [SerializeField] private UnityEvent onPlayerShoot;
 
-    [SerializeField] private float rotationSpeed = 10f;
+    [Header("Sound")]
+    [SerializeField] private AudioSource pAudioSource;
+
+    private Coroutine hasBeenDamagedCoroutine;
+    private Coroutine healingCoroutine;
 
     private bool isDeath = false;
 
@@ -45,6 +52,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             MovePlayer();
             RotatePlayer();
+            ChangeSoundState();
         }
     }
 
@@ -124,6 +132,15 @@ public class PlayerController : MonoBehaviour, IDamageable
         Vector3 moveVector = movementInput * playerData.speed;
         playerRB.velocity = new Vector3(moveVector.x, playerRB.velocity.y, moveVector.z);
         playerRB.velocity = Vector3.ClampMagnitude(playerRB.velocity, 10f);
+
+        if (movementInput.magnitude > 0.1f)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
     }
 
     private void RotatePlayer()
@@ -145,19 +162,59 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void GetDamaged(int damageAmount)
     {
+        if(hasBeenDamagedCoroutine != null) 
+        {
+            StopCoroutine(hasBeenDamagedCoroutine);
+            hasBeenDamagedCoroutine = null;
+        }
+        if(healingCoroutine != null)
+        {
+            StopCoroutine(healingCoroutine);
+            healingCoroutine = null;
+        }
+
         playerData.currentHealth -= damageAmount;
-
         onPlayerDamaged?.Invoke(playerData.currentHealth);
-
+        hasBeenDamaged = true;
+        hasBeenDamagedCoroutine = StartCoroutine(WaitToHeal());
         if (playerData.currentHealth < 0)
         {
             Die();
         }
     }
 
+    private IEnumerator WaitToHeal()
+    {
+        yield return new WaitForSeconds(3);
+        healingCoroutine = StartCoroutine(Healing());
+        hasBeenDamaged = false;
+    }
+
+    private IEnumerator Healing()
+    {
+        if(playerData.currentHealth < 100) 
+        {
+            playerData.currentHealth += 5;
+            onPlayerDamaged?.Invoke(playerData.currentHealth);
+        }
+        yield return new WaitForSeconds(1);
+        healingCoroutine = StartCoroutine(Healing());
+    }
+
     private void Die()
     {
         isDeath = true;
         GameManager.Instance.GameLost();
+    }
+
+    private void ChangeSoundState() {
+        if (isMoving)
+        {
+            pAudioSource.enabled = true;
+        }else
+        {
+            pAudioSource.enabled = false;
+        }
+        
     }
 }
