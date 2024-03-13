@@ -27,10 +27,12 @@ public class LevelLoader : MonoBehaviour
 
     private IEnumerator LoadLevelCoroutine(int buildIndex)
     {
+        Debug.Log("Si entro aca" + buildIndex);
         transitions.SetTrigger("End");
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSecondsRealtime(2);
         SceneManager.LoadSceneAsync(buildIndex);
         transitions.SetTrigger("Start");
+        Debug.Log("Si termino?");
     }
 
 }
