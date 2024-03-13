@@ -281,6 +281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a520b407e0aaca4c8596b219208fc8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSpeed: 10
+  hasBeenDamaged: 0
   playerData: {fileID: 11400000, guid: fe4a26ad363c5684a9f0e297c9c11fae, type: 2}
   weaponHolder: {fileID: 1180429119}
   onPlayerDamaged:
@@ -313,7 +315,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  rotationSpeed: 10
+  pAudioSource: {fileID: 0}
 --- !u!114 &1690839404354717405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3da3b6ff534b96469c521dd4d948b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 7459596641846148297}
 --- !u!82 &7459596641846148297
 AudioSource:
   m_ObjectHideFlags: 0

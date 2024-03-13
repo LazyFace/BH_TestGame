@@ -36,8 +36,16 @@ public class Bullet : MonoBehaviour
             //Debug.Log(collision.gameObject.name);
 
             gameObject.SetActive(false);
+            //StartCoroutine(DisableBulletOnCollision());
         }
     }
+    
+    /*
+    private IEnumerator DisableBulletOnCollision()
+    {
+        yield return null;
+        gameObject.SetActive(false);
+    }*/
 
     private IEnumerator DisableBullet()
     {
@@ -52,7 +60,7 @@ public class Bullet : MonoBehaviour
 
     private void BulletInitialVelocity()
     {
-        rb.AddForce(transform.forward * 500f, ForceMode.Force);
+        rb.AddForce(transform.forward * 250f, ForceMode.Force);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, 50f);
     }
 }
