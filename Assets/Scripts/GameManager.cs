@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        Time.timeScale = 1.0f;
+        ChangeTimeScale(1f);
     }
 
     private void Start()
@@ -34,9 +34,15 @@ public class GameManager : MonoBehaviour
 
     public void GameLost()
     {
-        Time.timeScale = 0.0f;
+        ChangeTimeScale(0f);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         uiHandler.ActivateGameOverScreen();
+    }
+
+    public void ChangeTimeScale(float timeScale)
+    {
+        Time.timeScale = timeScale;
+        Debug.Log("Time Scale " + Time.timeScale);
     }
 }

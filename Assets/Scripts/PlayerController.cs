@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private Coroutine healingCoroutine;
 
     private bool isDeath = false;
+    private bool justOnceDeath = false;
 
     private void Awake()
     {
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             playerRB = GetComponent<Rigidbody>();
         }
+
+        justOnceDeath = false;
 
         playerData.currentHealth = playerData.maxHealth;
     }
@@ -177,8 +180,10 @@ public class PlayerController : MonoBehaviour, IDamageable
         onPlayerDamaged?.Invoke(playerData.currentHealth);
         hasBeenDamaged = true;
         hasBeenDamagedCoroutine = StartCoroutine(WaitToHeal());
-        if (playerData.currentHealth < 0)
+
+        if (playerData.currentHealth < 0 && !justOnceDeath)
         {
+            justOnceDeath = true;
             Die();
         }
     }
@@ -204,6 +209,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void Die()
     {
         isDeath = true;
+        pAudioSource.enabled = false;
         GameManager.Instance.GameLost();
     }
 
