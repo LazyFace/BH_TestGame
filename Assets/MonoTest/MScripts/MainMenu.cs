@@ -23,10 +23,11 @@ public class MainMenu : MonoBehaviour
         LevelLoader.instance.ChangeScene(map);
     }
 
+    /*
     public void PlayersNumber(int players)
     {
         Debug.Log("Number of players = " + players);
 
         //GameManager function to instantiate the number of players (Max 2 players)
-    }
+    }*/
 }

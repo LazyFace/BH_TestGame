@@ -12,6 +12,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
 
     [SerializeField] private GameObject finalScreen;
+    [SerializeField] private GameObject pauseScreen;
 
     public void UpdatePlayerHealth(int currentHealth)
     {
@@ -31,5 +32,17 @@ public class UIHandler : MonoBehaviour
     public void ActivateGameOverScreen()
     {
         finalScreen.SetActive(true);
+    }
+
+    public void GamePauseScreen(int toggle)
+    {
+        if(toggle == 1)
+        {
+            pauseScreen.SetActive(true);
+        }
+        if(toggle == 0)
+        {
+            pauseScreen.SetActive(false);
+        }
     }
 }
