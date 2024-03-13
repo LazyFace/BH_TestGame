@@ -46,7 +46,7 @@ PrefabInstance:
     - target: {fileID: 7509543180916676158, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
       propertyPath: shotSound
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2522638316073916001}
     - target: {fileID: 7509543180916676158, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
       propertyPath: grabPosition
       value: 
@@ -109,6 +109,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
+--- !u!82 &2522638316073916001 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1998808387573887939, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
+  m_PrefabInstance: {fileID: 4088995292019008930}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5305730968305782993 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8151156583476131187, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
