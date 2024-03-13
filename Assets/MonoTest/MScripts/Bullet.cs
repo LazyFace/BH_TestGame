@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
                 damage.GetDamaged(weaponDamage);
             }
 
-            Debug.Log(collision.gameObject.name);
+            //Debug.Log(collision.gameObject.name);
 
             gameObject.SetActive(false);
         }

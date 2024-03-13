@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 96e1b3ebc1943bf4cbbecbcbc347aba4, type: 2}
+  enemyCollider: {fileID: 1174888246}
   rotationSpeed: 10
 --- !u!1001 &4739649732915318223
 PrefabInstance:

@@ -44,28 +44,12 @@ PrefabInstance:
       value: M 4
       objectReference: {fileID: 0}
     - target: {fileID: 7509543180916676158, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
-      propertyPath: shotSound
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7509543180916676158, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
       propertyPath: grabPosition
       value: 
       objectReference: {fileID: 984156689412423964}
     - target: {fileID: 8151156583476131187, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8151156583476131187, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8151156583476131187, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8151156583476131187, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8151156583476131187, guid: ab73d7f9c9fd2ee4d88b5600c7fb010f, type: 3}
       propertyPath: m_LocalPosition.x

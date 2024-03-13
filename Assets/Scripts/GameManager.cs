@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public void GameLost()
     {
         Time.timeScale = 0.0f;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         uiHandler.ActivateGameOverScreen();
     }

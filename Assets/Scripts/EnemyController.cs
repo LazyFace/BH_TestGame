@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private bool isDeath = false;
     private bool isAttacking = false;
     private bool isAttackingRight = true;
-
+    [SerializeField] private Collider enemyCollider;
     [SerializeField] private float rotationSpeed = 10f;
 
     //Animation references
@@ -53,6 +53,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
+        enemyCollider.enabled = true;
         isDeath = false;
         navMeshAgent.isStopped = false;
     }
@@ -165,6 +166,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private IEnumerator DieCoroutine()
     {
         isDeath = true;
+        enemyCollider.enabled = false;
         navMeshAgent.isStopped = true;
         navMeshAgent.speed = 0f;
         ChangeAnimation(dieAnimation.animationName, dieAnimation.isLoop);
