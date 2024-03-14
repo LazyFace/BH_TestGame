@@ -83,7 +83,7 @@ public class WeaponHolder : MonoBehaviour
 
     public void Reload()
     {
-       if(!weapon.isSwitchingWeapon)
+       if(!weapon.isSwitchingWeapon && !weaponsData[gunsIndex].reloading && weaponsData[gunsIndex].currentMagazineAmmo < weaponsData[gunsIndex].magazineSize)
         {
             IShootable shootable = gunList[gunsIndex].GetComponentInChildren<IShootable>();
             shootable?.Reload();
