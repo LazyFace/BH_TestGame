@@ -162,9 +162,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1988512378645309690, guid: b824757b9a2cc3641bc187182ea83794, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 17d5cce1f81b1ce468f7c2b2c4d034fa, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -264,4 +264,4 @@ MonoBehaviour:
   grabPosition: {fileID: 3223722748442492992}
   firePosition: {fileID: 6671887776032295865}
   bullet: {fileID: 4463183407775507191, guid: 7ca822a2d941ea74185c9507bf463f13, type: 3}
-  shotSound: {fileID: 2956704493757431885}
+  weaponAudioSource: {fileID: 2956704493757431885}

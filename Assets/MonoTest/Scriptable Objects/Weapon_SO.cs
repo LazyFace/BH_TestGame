@@ -12,6 +12,7 @@ public class Weapon_SO : ScriptableObject
     public float fireRate;
     public int gunDamage;
     public int maxDistance;
+    public AudioClip shootAudioClip;
 
     [Header("Reloading")]
     public int currentMagazineAmmo;
@@ -20,5 +21,5 @@ public class Weapon_SO : ScriptableObject
     public int maxAmmo;
     public int totalAmmo;
     public bool reloading;
-    
+    public AudioClip reloadAudioClip;
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Ammo : MonoBehaviour
 {
+    [SerializeField] AudioSource ammoBoxAudioSource;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -11,7 +12,14 @@ public class Ammo : MonoBehaviour
         {
             WeaponHolder weaponHolder = other.gameObject.GetComponentInChildren<WeaponHolder>();
             weaponHolder.FillAllAmmo();
-            this.gameObject.SetActive(false);   
+            StartCoroutine(WaitForSoundToDissapear());
         }
+    }
+
+    private IEnumerator WaitForSoundToDissapear()
+    {
+        ammoBoxAudioSource.Play();
+        yield return new WaitForSeconds(1);
+        this.gameObject.SetActive(false);
     }
 }

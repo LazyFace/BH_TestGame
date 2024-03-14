@@ -16,9 +16,11 @@ MonoBehaviour:
   fireRate: 0.5
   gunDamage: 30
   maxDistance: 50
+  shootAudioClip: {fileID: 8300000, guid: 17d5cce1f81b1ce468f7c2b2c4d034fa, type: 3}
   currentMagazineAmmo: 8
   reloadTime: 0.5
   magazineSize: 8
   maxAmmo: 40
-  totalAmmo: 40
+  totalAmmo: 37
   reloading: 0
+  reloadAudioClip: {fileID: 8300000, guid: 4e95a2895eda75144aef4fbacdb96717, type: 3}

@@ -7,7 +7,7 @@ public class Pistol : MonoBehaviour, IShootable
     [SerializeField] private Transform grabPosition;
     [SerializeField] private Transform firePosition;
     [SerializeField] private Bullet bullet;
-    [SerializeField] private AudioSource shotSound;
+    [SerializeField] private AudioSource weaponAudioSource;
 
     private float nextFire = 0.0f;
 
@@ -32,8 +32,7 @@ public class Pistol : MonoBehaviour, IShootable
                 //instantiate bullet
                 GameObject bulletInstance = ObjectPooler.Instance.SpawnFromPool(ObjectPooler.ObjectsToSpawn.BULLET, firePosition.position, firePosition.rotation);
                 bulletInstance.GetComponent<Bullet>().SetBulletDamage(weaponData.gunDamage);
-                if(shotSound != null)
-                    shotSound.Play();
+                weaponAudioSource.PlayOneShot(weaponData.shootAudioClip);
 
                 weaponData.totalAmmo--;
                 weaponData.currentMagazineAmmo--;
@@ -58,6 +57,7 @@ public class Pistol : MonoBehaviour, IShootable
         {
             weaponData.currentMagazineAmmo = weaponData.totalAmmo;
         }
+        weaponAudioSource.PlayOneShot(weaponData.reloadAudioClip);
         yield return new WaitForSeconds(weaponData.reloadTime);
         weaponData.reloading = false;
     }
