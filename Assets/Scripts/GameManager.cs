@@ -14,18 +14,21 @@ public class GameManager : MonoBehaviour
 
     private int points = 0;
     private bool isPause;
+    private bool isPlayerAlive;
 
     private void Awake()
     {
         Instance = this;
         ChangeTimeScale(1f);
-        isPause = false;
+        
     }
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = false;    
+        Cursor.visible = false;
+        isPause = false;
+        isPlayerAlive = true;
     }
 
     private void Update()
@@ -41,15 +44,17 @@ public class GameManager : MonoBehaviour
 
     public void GameLost()
     {
+        isPlayerAlive = false;
         ChangeTimeScale(0f);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         uiHandler.ActivateGameOverScreen();
+
     }
 
     private void GamePause()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && isPlayerAlive)
         {
             if (!isPause)
             {
