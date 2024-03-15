@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isPause = false;
         isPlayerAlive = true;
@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
             if (!isPause)
             {
                 isPause = true;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 ChangeTimeScale(0.0f);
                 uiHandler.GamePauseScreen(1);
             }
@@ -66,6 +68,8 @@ public class GameManager : MonoBehaviour
             else if (isPause)
             {
                 isPause = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 ChangeTimeScale(1.0f);
                 uiHandler.GamePauseScreen(0);
             }

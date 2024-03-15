@@ -9,6 +9,12 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private AudioMixer mixer;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     public void SetMusicVolume(float musicVolume)
     {
         mixer.SetFloat("musicVolume", musicVolume);
