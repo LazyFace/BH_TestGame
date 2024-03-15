@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     private void GamePause()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && isPlayerAlive)
+        if(Input.GetKeyDown(KeyCode.Tab) && isPlayerAlive)
         {
             if (!isPause)
             {
