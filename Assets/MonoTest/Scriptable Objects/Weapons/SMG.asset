@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: SMG
   fireRate: 0.25
-  gunDamage: 30
+  gunDamage: 35
   maxDistance: 50
   shootAudioClip: {fileID: 8300000, guid: 17d5cce1f81b1ce468f7c2b2c4d034fa, type: 3}
   currentMagazineAmmo: 20

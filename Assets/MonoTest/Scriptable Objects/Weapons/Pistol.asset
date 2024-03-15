@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: PISTOL
   fireRate: 0.5
-  gunDamage: 30
+  gunDamage: 40
   maxDistance: 50
   shootAudioClip: {fileID: 8300000, guid: 17d5cce1f81b1ce468f7c2b2c4d034fa, type: 3}
   currentMagazineAmmo: 8
