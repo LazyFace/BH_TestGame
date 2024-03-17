@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private int health;
     private float speed;
     private int damage;
-    private bool isDeath = false;
+    public bool isDeath = false;
     private bool isAttacking = false;
     private bool isAttackingRight = true;
     [SerializeField] private Collider enemyCollider;

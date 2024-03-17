@@ -15,9 +15,12 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private PlayerConfig_SO playerData;
     [SerializeField] private WeaponHolder weaponHolder;
 
+    [SerializeField] private EnemyDetector enemyDetector;
+
     [SerializeField] private UnityEvent<int> onPlayerDamaged;
     [SerializeField] private UnityEvent onPlayerShoot;
 
+    //Sonido
     [Header("Sound")]
     [SerializeField] private AudioSource pAudioSource;
 
@@ -138,13 +141,29 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void RotatePlayer()
     {
-        Vector3 movementDirection = playerRB.velocity;
-        movementDirection.y = 0;
-
-        if (movementDirection != Vector3.zero)
+        if (enemyDetector.areEnemiesInView)
         {
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            playerRB.rotation = Quaternion.Slerp(playerRB.rotation, toRotation, Time.deltaTime * rotationSpeed);
+            if(enemyDetector.GetClosestEnemy() != null)
+            {
+                Vector3 enemyDirection = enemyDetector.GetClosestEnemy().position - playerRB.position;
+                enemyDirection.y = 0;
+                if (enemyDirection != Vector3.zero)
+                {
+                    Quaternion enemyRotation = Quaternion.LookRotation(enemyDirection, Vector3.up);
+                    playerRB.rotation = Quaternion.Slerp(playerRB.rotation, enemyRotation, Time.deltaTime * rotationSpeed);
+                }
+            }
+        }
+        else
+        {
+            Vector3 movementDirection = playerRB.velocity;
+            movementDirection.y = 0;
+
+            if (movementDirection != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+                playerRB.rotation = Quaternion.Slerp(playerRB.rotation, toRotation, Time.deltaTime * rotationSpeed);
+            }
         }
     }
 
