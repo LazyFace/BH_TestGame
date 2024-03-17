@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a759b3d31b7904ab4596517b383d28, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
-  health: 120
+  health: 100
   speed: 2
   damage: 10
   points: 100
+  gotHitSound: {fileID: 8300000, guid: c32419aa9c207ef4bb7b61bc8d35e2ca, type: 3}

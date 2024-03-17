@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a759b3d31b7904ab4596517b383d28, type: 3}
   m_Name: Ghost
   m_EditorClassIdentifier: 
-  health: 60
+  health: 50
   speed: 2.5
   damage: 20
   points: 200
+  gotHitSound: {fileID: 8300000, guid: 441d1df62a523dc4b9fcadc03203c8c0, type: 3}

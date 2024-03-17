@@ -8,4 +8,5 @@ public class EnemyConfig_SO : ScriptableObject
     public float speed;
     public int damage;
     public int points;
+    public AudioClip gotHitSound;
 }

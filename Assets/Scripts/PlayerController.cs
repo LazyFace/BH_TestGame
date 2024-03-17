@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     private Vector3 movementInput;
     [SerializeField] private float rotationSpeed = 10f;
     public bool hasBeenDamaged = false;
-    private bool isMoving = false;
 
     [SerializeField] private PlayerConfig_SO playerData;
     [SerializeField] private WeaponHolder weaponHolder;
@@ -46,6 +45,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             GetInput();
             PlayerGunActions();
+            ChangeSoundState();
         }
     }
 
@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             MovePlayer();
             RotatePlayer();
-            ChangeSoundState();
         }
     }
 
@@ -135,30 +134,16 @@ public class PlayerController : MonoBehaviour, IDamageable
         Vector3 moveVector = movementInput * playerData.speed;
         playerRB.velocity = new Vector3(moveVector.x, playerRB.velocity.y, moveVector.z);
         playerRB.velocity = Vector3.ClampMagnitude(playerRB.velocity, 10f);
-
-        if (movementInput.magnitude > 0.1f)
-        {
-            isMoving = true;
-        }
-        else
-        {
-            isMoving = false;
-        }
     }
 
     private void RotatePlayer()
     {
-        // Determina la dirección del movimiento basada en la velocidad del Rigidbody.
         Vector3 movementDirection = playerRB.velocity;
-        movementDirection.y = 0; // Ignora la componente Y para la rotación.
+        movementDirection.y = 0;
 
-        // Verifica si el jugador se está moviendo.
         if (movementDirection != Vector3.zero)
         {
-            // Crea una rotación que mira en la dirección del movimiento.
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-
-            // Suaviza la transición hacia la nueva rotación.
             playerRB.rotation = Quaternion.Slerp(playerRB.rotation, toRotation, Time.deltaTime * rotationSpeed);
         }
     }
@@ -213,14 +198,15 @@ public class PlayerController : MonoBehaviour, IDamageable
         GameManager.Instance.GameLost();
     }
 
-    private void ChangeSoundState() {
-        if (isMoving)
+    private void ChangeSoundState() 
+    {
+        if (movementInput.magnitude > 0.1f)
         {
             pAudioSource.enabled = true;
-        }else
+        }
+        else
         {
             pAudioSource.enabled = false;
         }
-        
     }
 }

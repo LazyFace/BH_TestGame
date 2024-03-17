@@ -21,6 +21,9 @@ public class EnemyController : MonoBehaviour, IDamageable
     [SerializeField] private Collider enemyCollider;
     [SerializeField] private float rotationSpeed = 10f;
 
+    //Sound
+    [SerializeField] private AudioSource enemyAudioSource;
+
     //Animation references
     private Animator animator;
     private string currentState;
@@ -152,7 +155,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void GetDamaged(int damageAmount)
     {
         health -= damageAmount;
-        if(!isDeath && health < 0)
+        enemyAudioSource.PlayOneShot(enemyData.gotHitSound);
+        if (!isDeath && health < 0)
         {
             Die();
         }

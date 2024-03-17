@@ -47,8 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384b2eb9423891d489eb2bfbcaa1daec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsCountingUI: {fileID: 0}
-  finishScreen: {fileID: 0}
+  uiHandler: {fileID: 0}
 --- !u!114 &2912439040619873305
 MonoBehaviour:
   m_ObjectHideFlags: 0
