@@ -39,10 +39,12 @@ public class RoundManager : MonoBehaviour
     private IEnumerator WaitAndStartNextRound(float waitTime)
     {
         //Debug.Log("Waiting Next Round");
-        onStartRound?.Invoke(); 
+        onStartRound?.Invoke();
+        GameManager.Instance.ShowAmmoMessage();
         yield return new WaitForSeconds(waitTime);
         //Debug.Log("Ready Next Round");
         currentRound++;
+        GameManager.Instance.UpdateHUDRoundCounter(currentRound);
         StartRound();
     }
 
