@@ -11,6 +11,8 @@ public class UIHandler : MonoBehaviour
 
     [SerializeField] private TMP_Text weaponInfo;
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text roundCountText;
+    [SerializeField] private TMP_Text searchAmmoText;
     [SerializeField] private TMP_Text finalScoreText;
 
     [SerializeField] private GameObject finalScreen;
@@ -66,5 +68,22 @@ public class UIHandler : MonoBehaviour
         {
             pauseScreen.SetActive(false);
         }
+    }
+
+    public void UpdateRoundCount(int round)
+    {
+        roundCountText.text = "ROUND " + round;
+    }
+
+    public void ShowAmmoMessage()
+    {
+        StartCoroutine(SearchAmmoAdvise());
+    }
+
+    private IEnumerator SearchAmmoAdvise()
+    {
+        searchAmmoText.enabled = true;
+        yield return new WaitForSeconds(3);
+        searchAmmoText.enabled = false;
     }
 }

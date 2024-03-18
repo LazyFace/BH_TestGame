@@ -34,7 +34,7 @@ public class LevelLoader : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.75f);
             GameManager.Instance.ChangeTimeScale(1);      
         }
-        else { yield return new WaitForSecondsRealtime(2); }
+        else { yield return new WaitForSecondsRealtime(1); }
         
         SceneManager.LoadSceneAsync(buildIndex);
         transitions.SetTrigger("Start");

@@ -76,4 +76,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = timeScale;
         //Debug.Log("Time Scale " + Time.timeScale);
     }
+
+    public void UpdateHUDRoundCounter(int round)
+    {
+        uiHandler.UpdateRoundCount(round);
+    }
+
+    public void ShowAmmoMessage()
+    {
+        uiHandler.ShowAmmoMessage();
+    }
 }
