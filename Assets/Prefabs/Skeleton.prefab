@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 96e1b3ebc1943bf4cbbecbcbc347aba4, type: 2}
+  isDeath: 0
   enemyCollider: {fileID: 1174888246}
   rotationSpeed: 10
   enemyAudioSource: {fileID: -4770769036055625237}
@@ -112,7 +113,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1988512378645309690, guid: b824757b9a2cc3641bc187182ea83794, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6f3da5477e5104544b4c63f44961bc0d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
   m_Pitch: 1
