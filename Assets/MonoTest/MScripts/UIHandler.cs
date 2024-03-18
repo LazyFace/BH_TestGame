@@ -12,9 +12,9 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private TMP_Text weaponInfo;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text roundCountText;
-    [SerializeField] private TMP_Text searchAmmoText;
     [SerializeField] private TMP_Text finalScoreText;
 
+    [SerializeField] private GameObject searchAmmoText;
     [SerializeField] private GameObject finalScreen;
     [SerializeField] private GameObject pauseScreen;
 
@@ -82,8 +82,8 @@ public class UIHandler : MonoBehaviour
 
     private IEnumerator SearchAmmoAdvise()
     {
-        searchAmmoText.enabled = true;
+        searchAmmoText.SetActive(true);
         yield return new WaitForSeconds(3);
-        searchAmmoText.enabled = false;
+        searchAmmoText.SetActive(false);
     }
 }
