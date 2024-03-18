@@ -10,6 +10,7 @@ public class UIHandler : MonoBehaviour
 
     [SerializeField] private TMP_Text weaponInfo;
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text finalScoreText;
 
     [SerializeField] private GameObject finalScreen;
     [SerializeField] private GameObject pauseScreen;
@@ -18,6 +19,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private Material regenHealthBarMaterial;
 
     private Coroutine ReturnHealthBarToNormalState;
+    private int scoreCounter;
 
     public void UpdatePlayerHealth(int currentHealth)
     {
@@ -47,9 +49,10 @@ public class UIHandler : MonoBehaviour
         weaponInfo.text = $"{gunName}: {currentMagazineAmmo} / {currentTotalAmmo}";
     }
 
-    public void ActivateGameOverScreen()
+    public void ActivateGameOverScreen(int score)
     {
         finalScreen.SetActive(true);
+        finalScoreText.text = "YOUR SCORE: " + score;  
     }
 
     public void GamePauseScreen(int toggle)

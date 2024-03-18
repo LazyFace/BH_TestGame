@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         ChangeTimeScale(0f);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        uiHandler.ActivateGameOverScreen();
+        uiHandler.ActivateGameOverScreen(points);
     }
 
     private void GamePause()
