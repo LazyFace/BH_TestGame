@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIHandler : MonoBehaviour
 {
     [SerializeField] private Slider slider;
+    [SerializeField] private Image sliderImage;
 
     [SerializeField] private TMP_Text weaponInfo;
     [SerializeField] private TMP_Text scoreText;
@@ -14,9 +15,27 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject finalScreen;
     [SerializeField] private GameObject pauseScreen;
 
+    [SerializeField] private Material healthBarMaterial;
+    [SerializeField] private Material regenHealthBarMaterial;
+
+    private Coroutine ReturnHealthBarToNormalState;
+
     public void UpdatePlayerHealth(int currentHealth)
     {
+        if(ReturnHealthBarToNormalState != null) 
+        { 
+            StopCoroutine(ReturnHealthBarToNormalState);
+        }
         slider.value = currentHealth;
+        sliderImage.material = regenHealthBarMaterial;
+        ReturnHealthBarToNormalState = StartCoroutine(ResetHealthBarMaterial());
+    }
+
+    private IEnumerator ResetHealthBarMaterial()
+    {
+        yield return new WaitForSeconds(1);
+
+        sliderImage.material = healthBarMaterial;
     }
 
     public void UpdateScore(int score) 

@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     //Sonido
     [Header("Sound")]
-    [SerializeField] private AudioSource pAudioSource;
+    [SerializeField] private AudioSource pHurtAudioSource;
+    [SerializeField] private AudioSource pMovementAudioSource;
 
     private Coroutine hasBeenDamagedCoroutine;
     private Coroutine healingCoroutine;
@@ -181,6 +182,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
 
         playerData.currentHealth -= damageAmount;
+        pHurtAudioSource.PlayOneShot(pHurtAudioSource.clip);
         onPlayerDamaged?.Invoke(playerData.currentHealth);
         hasBeenDamaged = true;
         hasBeenDamagedCoroutine = StartCoroutine(WaitToHeal());
@@ -213,7 +215,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void Die()
     {
         isDeath = true;
-        pAudioSource.enabled = false;
+        pMovementAudioSource.enabled = false;
         GameManager.Instance.GameLost();
     }
 
@@ -221,11 +223,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (movementInput.magnitude > 0.1f)
         {
-            pAudioSource.enabled = true;
+            pMovementAudioSource.enabled = true;
         }
         else
         {
-            pAudioSource.enabled = false;
+            pMovementAudioSource.enabled = false;
         }
     }
 }
