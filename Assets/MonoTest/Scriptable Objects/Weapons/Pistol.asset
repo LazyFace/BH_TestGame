@@ -21,6 +21,6 @@ MonoBehaviour:
   reloadTime: 0.5
   magazineSize: 8
   maxAmmo: 40
-  totalAmmo: 37
+  totalAmmo: 40
   reloading: 0
   reloadAudioClip: {fileID: 8300000, guid: 4e95a2895eda75144aef4fbacdb96717, type: 3}
