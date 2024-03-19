@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1190485730}
-  - component: {fileID: 8960162021327431582}
+  - component: {fileID: 3787391501999871106}
   - component: {fileID: 3490065520853978842}
   m_Layer: 7
   m_Name: AimAssist
@@ -96,8 +96,8 @@ Transform:
   m_Father: {fileID: 1690839404354717377}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8960162021327431582
-BoxCollider:
+--- !u!135 &3787391501999871106
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,7 +107,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 1, z: 10}
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3490065520853978842
 MonoBehaviour:

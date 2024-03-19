@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             GetInput();
             PlayerGunActions();
             ChangeSoundState();
+            RotatePlayer();
         }
     }
 
@@ -57,7 +58,6 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (!isDeath) 
         {
             MovePlayer();
-            RotatePlayer();
         }
     }
 
