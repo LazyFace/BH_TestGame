@@ -1,4 +1,4 @@
-# Death Hunting Survival
+# [Death Hunting Survival](https://lazyface.itch.io/death-hunting-survival)
 
 Welcome to **Death Hunting Survival**, a captivating low poly style survival game where you step into the boots of a brave farmer fighting to survive from relentless waves of enemies.
 
